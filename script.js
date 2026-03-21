@@ -41,10 +41,10 @@ const SUPABASE_ANON   = 'sb_publishable_V82l5FaB0D7fLq3BRQhCIQ_F7XhTMNd';       
 // 2. Ajouter service Gmail/Outlook → copier Service ID
 // 3. Créer template avec variables : {{client_name}}, {{client_email}}, {{client_phone}}, {{date}}, {{time}}, {{goal}}, {{msg}}
 // 4. Copier Template ID et Public Key
-const EMAILJS_SERVICE  = 'YOUR_SERVICE_ID';   // ← à remplacer
-const EMAILJS_TEMPLATE = 'YOUR_TEMPLATE_ID';  // ← à remplacer
-const EMAILJS_KEY      = 'YOUR_PUBLIC_KEY';   // ← à remplacer
-const COACH_EMAIL      = 'votre@email.com';   // ← votre adresse email
+const EMAILJS_SERVICE  = 'service_qj6fbsw';   // ← à remplacer
+const EMAILJS_TEMPLATE = 'template_7mb8rpr';  // ← à remplacer
+const EMAILJS_KEY      = 'H1Q5-s2VlLuV-Lze8';   // ← à remplacer
+const COACH_EMAIL      = 'charlesmachadopro@gmail.com';   // ← votre adresse email
 
 // ═══════════════════════════════════════════════
 //  INIT
