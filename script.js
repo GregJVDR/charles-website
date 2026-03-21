@@ -388,7 +388,7 @@ function sendCoachEmail(booking) {
     coach_email:COACH_EMAIL, client_name:booking.user_name,
     client_email:booking.user_email, client_phone:booking.user_phone,
     date:booking.date, time:booking.time, goal:booking.goal,
-    message:booking.msg||'Aucun message'
+    msg: booking.msg || 'Aucun message'
   }).then(()=>console.log('✅ Coach notifié')).catch(e=>console.warn('EmailJS:',e));
 }
 
