@@ -1,105 +1,202 @@
 // ═══════════════════════════════════════════════
-//  CONFIGURATION — À REMPLIR UNE SEULE FOIS
+//  CONFIGURATION
 // ═══════════════════════════════════════════════
-//
-// SUPABASE (base de données en ligne — gratuit)
-// 1. Créez un compte sur https://supabase.com
-// 2. Nouveau projet → copiez l'URL et la clé anon
-// 3. Dans SQL Editor, exécutez le script suivant :
-//
-//   CREATE TABLE users (
-//     id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
-//     name text NOT NULL,
-//     email text UNIQUE NOT NULL,
-//     phone text,
-//     pwd text NOT NULL,
-//     created_at timestamptz DEFAULT now()
-//   );
-//   CREATE TABLE bookings (
-//     id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
-//     user_id uuid REFERENCES users(id),
-//     user_email text NOT NULL,
-//     user_name text NOT NULL,
-//     user_phone text,
-//     date text NOT NULL,
-//     time text NOT NULL,
-//     goal text NOT NULL,
-//     msg text,
-//     created_at timestamptz DEFAULT now()
-//   );
-//   -- Activer l'accès public (RLS)
-//   ALTER TABLE users ENABLE ROW LEVEL SECURITY;
-//   ALTER TABLE bookings ENABLE ROW LEVEL SECURITY;
-//   CREATE POLICY "Allow all" ON users FOR ALL USING (true) WITH CHECK (true);
-//   CREATE POLICY "Allow all" ON bookings FOR ALL USING (true) WITH CHECK (true);
-//
-const SUPABASE_URL    = 'https://elzpqfcnfneasabcqnte.supabase.co';  // ← à remplacer
-const SUPABASE_ANON   = 'sb_publishable_V82l5FaB0D7fLq3BRQhCIQ_F7XhTMNd';                    // ← à remplacer
-
-// EMAILJS (notifications email au coach — gratuit 200/mois)
-// 1. https://emailjs.com → nouveau compte
-// 2. Ajouter service Gmail/Outlook → copier Service ID
-// 3. Créer template avec variables : {{client_name}}, {{client_email}}, {{client_phone}}, {{date}}, {{time}}, {{goal}}, {{msg}}
-// 4. Copier Template ID et Public Key
-const EMAILJS_SERVICE  = 'service_qj6fbsw';   // ← à remplacer
-const EMAILJS_TEMPLATE = 'template_7mb8rpr';  // ← à remplacer
-const EMAILJS_KEY      = 'H1Q5-s2VlLuV-Lze8';   // ← à remplacer
-const COACH_EMAIL      = 'charlesmachadopro@gmail.com';   // ← votre adresse email
+const SUPABASE_URL    = 'https://elzpqfcnfneasabcqnte.supabase.co';
+const SUPABASE_ANON   = 'sb_publishable_V82l5FaB0D7fLq3BRQhCIQ_F7XhTMNd';
+const EMAILJS_SERVICE  = 'service_qj6fbsw';
+const EMAILJS_TEMPLATE = 'template_7mb8rpr';
+const EMAILJS_KEY      = 'H1Q5-s2VlLuV-Lze8';
+const COACH_EMAIL      = 'charlesmachadopro@gmail.com';
 
 // ═══════════════════════════════════════════════
 //  INIT
 // ═══════════════════════════════════════════════
-let sb = null;  // Supabase client
+let sb = null;
 let currentUser = null;
 
 async function initApp() {
-  // Try to init Supabase
-  if (typeof supabase !== 'undefined' && SUPABASE_URL.includes('supabase.co') && !SUPABASE_URL.includes('VOTRE')) {
+  // Safety timeout — never block UI more than 3s
+  const loadingTimeout = setTimeout(() => {
+    const loading = document.getElementById('dbLoading');
+    const auth    = document.getElementById('authContainer');
+    if (loading && loading.style.display !== 'none') {
+      loading.style.display = 'none';
+      if (auth) auth.style.display = 'block';
+    }
+  }, 3000);
+
+  if (typeof supabase !== 'undefined' && SUPABASE_URL.includes('supabase.co')) {
     try {
       sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
       console.log('✅ Supabase connected');
     } catch(e) { console.warn('Supabase init error:', e); }
-  } else {
-    console.info('ℹ️ Mode démo — configurez Supabase dans script.js pour la production');
   }
 
-  // Check saved session
   const saved = sessionStorage.getItem('cm_user');
   if (saved) {
-    try { currentUser = JSON.parse(saved); onLogin(currentUser); return; } catch {}
+    try { currentUser = JSON.parse(saved); clearTimeout(loadingTimeout); onLogin(currentUser); return; } catch {}
   }
+  clearTimeout(loadingTimeout);
   document.getElementById('dbLoading').style.display = 'none';
   document.getElementById('authContainer').style.display = 'block';
 }
 
-window.addEventListener('load', initApp);
+window.addEventListener('DOMContentLoaded', () => {
+  initApp();
+  initCursor();
+  initNav();
+  initReveal();
+  initCountUp();
+  initParticles();
+});
 
 // ═══════════════════════════════════════════════
-//  CURSOR & UI
+//  MOBILE MENU
 // ═══════════════════════════════════════════════
-const cursor = document.getElementById('cursor');
-const trail  = document.getElementById('cursorTrail');
-let mx = 0, my = 0;
-document.addEventListener('mousemove', e => {
-  mx = e.clientX; my = e.clientY;
-  cursor.style.left = mx+'px'; cursor.style.top = my+'px';
-  setTimeout(() => { trail.style.left = mx+'px'; trail.style.top = my+'px'; }, 80);
-});
-document.querySelectorAll('a,button,.cal-day,.time-slot,.formation-card').forEach(el => {
-  el.addEventListener('mouseenter', () => cursor.style.transform='translate(-50%,-50%) scale(2.5)');
-  el.addEventListener('mouseleave', () => cursor.style.transform='translate(-50%,-50%) scale(1)');
-});
-const nav = document.getElementById('mainNav');
-window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
-const observer = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('visible'); }), {threshold:0.12});
-document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
-const colL = document.querySelector('.hero-col-left');
-const colR = document.querySelector('.hero-col-right');
-window.addEventListener('scroll', () => {
-  const y = window.scrollY;
-  if(colL) colL.style.transform=`translateY(${y*0.06}px)`;
-  if(colR) colR.style.transform=`translateY(${-y*0.04}px)`;
-});
+function closeMobileMenu() {
+  const menu = document.getElementById('mobileMenu');
+  const btn  = document.getElementById('hamburger');
+  if (menu) menu.classList.remove('open');
+  if (btn)  btn.classList.remove('open');
+}
+
+function initNav() {
+  const nav  = document.getElementById('mainNav');
+  const btn  = document.getElementById('hamburger');
+  const menu = document.getElementById('mobileMenu');
+
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  if (btn && menu) {
+    btn.addEventListener('click', () => {
+      btn.classList.toggle('open');
+      menu.classList.toggle('open');
+    });
+  }
+
+  // Close menu on outside click
+  document.addEventListener('click', (e) => {
+    if (menu && menu.classList.contains('open')) {
+      if (!nav.contains(e.target)) closeMobileMenu();
+    }
+  });
+}
+
+// ═══════════════════════════════════════════════
+//  CURSOR
+// ═══════════════════════════════════════════════
+function initCursor() {
+  const cursor = document.getElementById('cursor');
+  const trail  = document.getElementById('cursorTrail');
+  if (!cursor || !trail) return;
+  let mx = 0, my = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx+'px';
+    cursor.style.top  = my+'px';
+    setTimeout(() => {
+      trail.style.left = mx+'px';
+      trail.style.top  = my+'px';
+    }, 80);
+  });
+  document.querySelectorAll('a,button,.cal-day,.time-slot,.methode-card,.gallery-item').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.style.transform='translate(-50%,-50%) scale(2.4)');
+    el.addEventListener('mouseleave', () => cursor.style.transform='translate(-50%,-50%) scale(1)');
+  });
+}
+
+// ═══════════════════════════════════════════════
+//  REVEAL (IntersectionObserver)
+// ═══════════════════════════════════════════════
+function initReveal() {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(x => {
+      if (x.isIntersecting) x.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
+}
+
+// ═══════════════════════════════════════════════
+//  COUNT UP ANIMATION
+// ═══════════════════════════════════════════════
+function initCountUp() {
+  const elements = document.querySelectorAll('.count-up');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el     = entry.target;
+        const target = parseInt(el.dataset.target);
+        const duration = 1400;
+        const step   = 16;
+        const steps  = duration / step;
+        const increment = target / steps;
+        let current = 0;
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            el.textContent = target;
+            clearInterval(timer);
+          } else {
+            el.textContent = Math.floor(current);
+          }
+        }, step);
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  elements.forEach(el => observer.observe(el));
+}
+
+// ═══════════════════════════════════════════════
+//  PARTICLE CANVAS (golden dust)
+// ═══════════════════════════════════════════════
+function initParticles() {
+  const canvas = document.getElementById('particleCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H, particles;
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const NUM = window.innerWidth < 768 ? 30 : 60;
+  particles = Array.from({length: NUM}, () => ({
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
+    r: Math.random() * 1.5 + 0.3,
+    dx: (Math.random() - 0.5) * 0.25,
+    dy: -Math.random() * 0.4 - 0.1,
+    opacity: Math.random() * 0.5 + 0.1,
+    flicker: Math.random() * Math.PI * 2,
+  }));
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    const now = Date.now() / 1000;
+    particles.forEach(p => {
+      p.x  += p.dx;
+      p.y  += p.dy;
+      p.flicker += 0.03;
+      if (p.y < -4)      p.y = H + 4;
+      if (p.x < -4)      p.x = W + 4;
+      if (p.x > W + 4)   p.x = -4;
+      const op = p.opacity * (0.6 + 0.4 * Math.sin(p.flicker));
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(201,168,76,${op})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
 
 // ═══════════════════════════════════════════════
 //  DEMO FALLBACK (localStorage)
@@ -120,9 +217,9 @@ const PROGRAMS = {
 };
 function openPayment(prog) {
   const p = PROGRAMS[prog];
-  document.getElementById('modalTitle').textContent  = p.name;
-  document.getElementById('modalPrice').textContent  = p.price;
-  document.getElementById('payBtn').textContent      = p.price;
+  document.getElementById('modalTitle').textContent = p.name;
+  document.getElementById('modalPrice').textContent = p.price;
+  document.getElementById('payBtn').textContent     = p.price;
   document.getElementById('paymentModal').classList.add('active');
 }
 function processPayment(e) {
@@ -139,7 +236,8 @@ function formatExpiry(el) { let v=el.value.replace(/\D/g,'').substring(0,4); if(
 //  AUTH
 // ═══════════════════════════════════════════════
 function switchTab(tab) {
-  document.querySelectorAll('.auth-tab').forEach((t,i)=>t.classList.toggle('active',(tab==='login'&&i===0)||(tab==='register'&&i===1)));
+  document.querySelectorAll('.auth-tab').forEach((t,i) =>
+    t.classList.toggle('active',(tab==='login'&&i===0)||(tab==='register'&&i===1)));
   document.getElementById('loginForm').style.display    = tab==='login'?'flex':'none';
   document.getElementById('registerForm').style.display = tab==='register'?'flex':'none';
 }
@@ -153,9 +251,7 @@ async function register() {
   err.style.display='none';
   if(!name||!email||!pwd){err.textContent='Veuillez remplir tous les champs requis.';err.style.display='block';return;}
   if(pwd.length<6){err.textContent='Le mot de passe doit contenir au moins 6 caractères.';err.style.display='block';return;}
-
-  if(sb) {
-    // Check if email exists
+  if(sb){
     const {data:existing} = await sb.from('users').select('id').eq('email',email).maybeSingle();
     if(existing){err.textContent='Un compte existe déjà avec cet email.';err.style.display='block';return;}
     const {data,error} = await sb.from('users').insert({name,email,phone,pwd}).select().single();
@@ -178,8 +274,7 @@ async function login() {
   const pwd   = document.getElementById('loginPwd').value;
   const err   = document.getElementById('loginError');
   err.style.display='none';
-
-  if(sb) {
+  if(sb){
     const {data,error} = await sb.from('users').select('*').eq('email',email).eq('pwd',pwd).maybeSingle();
     if(error||!data){err.textContent='Email ou mot de passe incorrect.';err.style.display='block';return;}
     currentUser={id:data.id,name:data.name,email:data.email,phone:data.phone};
@@ -214,20 +309,20 @@ function onLogin(user) {
 //  BOOKING TABS
 // ═══════════════════════════════════════════════
 function switchBookingTab(tab) {
-  document.querySelectorAll('.booking-tab').forEach((t,i)=>t.classList.toggle('active',(tab==='new'&&i===0)||(tab==='mine'&&i===1)));
+  document.querySelectorAll('.booking-tab').forEach((t,i) =>
+    t.classList.toggle('active',(tab==='new'&&i===0)||(tab==='mine'&&i===1)));
   document.getElementById('newBookingPanel').style.display = tab==='new'?'block':'none';
   document.getElementById('myBookingsPanel').style.display = tab==='mine'?'block':'none';
   if(tab==='mine') renderMyBookings();
 }
 
 // ═══════════════════════════════════════════════
-//  CALENDAR — REAL TIME
+//  CALENDAR
 // ═══════════════════════════════════════════════
 let currentYear  = new Date().getFullYear();
 let currentMonth = new Date().getMonth();
 let selectedDate = null;
 let selectedTime = null;
-let allBookings  = [];  // cache
 
 const TIMES = ['08:00','09:00','10:00','11:00','14:00','15:00','16:00','17:00','18:00'];
 const MONTHS = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
@@ -242,19 +337,16 @@ function changeMonth(dir) {
 
 async function renderCalendar() {
   document.getElementById('calMonthLabel').textContent = MONTHS[currentMonth]+' '+currentYear;
-  // Load bookings for this month from DB
   const monthStr = `${currentYear}-${String(currentMonth+1).padStart(2,'0')}`;
-  if(sb) {
+  let allBookings = [];
+  if(sb){
     const {data} = await sb.from('bookings').select('date,time').like('date',monthStr+'%');
     allBookings = data || [];
   } else {
     allBookings = demoGetBookings().filter(b=>b.date.startsWith(monthStr));
   }
-
-  // Count bookings per day
   const dayCount = {};
   allBookings.forEach(b=>{ dayCount[b.date]=(dayCount[b.date]||0)+1; });
-
   const firstDay  = new Date(currentYear,currentMonth,1).getDay();
   const daysCount = new Date(currentYear,currentMonth+1,0).getDate();
   const offset    = (firstDay+6)%7;
@@ -262,7 +354,6 @@ async function renderCalendar() {
   const container = document.getElementById('calendarDays');
   if(!container) return;
   container.innerHTML='';
-
   for(let i=0;i<offset;i++){const el=document.createElement('div');el.className='cal-day empty';container.appendChild(el);}
   for(let d=1;d<=daysCount;d++){
     const el=document.createElement('div'); el.className='cal-day';
@@ -294,8 +385,6 @@ async function selectDate(dateStr,el) {
   document.getElementById('bookingConfirm').style.display='none';
   document.getElementById('slotsLoading').style.display='block';
   document.getElementById('timeSlots').innerHTML='';
-
-  // Load booked times for this date (real-time)
   let bookedTimes=new Set();
   if(sb){
     const {data}=await sb.from('bookings').select('time').eq('date',dateStr);
@@ -336,38 +425,30 @@ async function confirmBooking() {
   const msg =document.getElementById('bookMsg').value.trim();
   if(!selectedDate||!selectedTime){alert('Choisissez une date et un créneau.');return;}
   if(!goal){alert('Choisissez un objectif.');return;}
-
   const btn=document.getElementById('confirmBtn');
   btn.textContent='Confirmation…'; btn.disabled=true;
-
   const booking={
     user_id:currentUser.id, user_email:currentUser.email,
     user_name:currentUser.name, user_phone:currentUser.phone||'',
     date:selectedDate, time:selectedTime, goal, msg
   };
-
   if(sb){
-    // Double-check slot is still free (race condition protection)
     const {data:existing}=await sb.from('bookings').select('id').eq('date',selectedDate).eq('time',selectedTime).maybeSingle();
     if(existing){
-      btn.textContent='Confirmer le rendez-vous →'; btn.disabled=false;
+      btn.textContent='Confirmer le rendez-vous'; btn.disabled=false;
       alert('Ce créneau vient d\'être pris. Veuillez en choisir un autre.');
       selectDate(selectedDate,document.querySelector('.cal-day.selected'));
       return;
     }
     const {error}=await sb.from('bookings').insert(booking);
-    if(error){btn.textContent='Confirmer le rendez-vous →';btn.disabled=false;alert('Erreur: '+error.message);return;}
+    if(error){btn.textContent='Confirmer le rendez-vous';btn.disabled=false;alert('Erreur: '+error.message);return;}
   } else {
-    // Demo mode: check locally
     const existing=demoGetBookings().find(b=>b.date===selectedDate&&b.time===selectedTime);
-    if(existing){btn.textContent='Confirmer →';btn.disabled=false;alert('Créneau déjà pris.');return;}
+    if(existing){btn.textContent='Confirmer';btn.disabled=false;alert('Créneau déjà pris.');return;}
     const bk=demoGetBookings(); bk.push({...booking,id:'demo_'+Date.now()}); demoSaveBookings(bk);
   }
-
-  // Send email notification to coach
   sendCoachEmail(booking);
-
-  btn.textContent='Confirmer le rendez-vous →'; btn.disabled=false;
+  btn.textContent='Confirmer le rendez-vous'; btn.disabled=false;
   document.getElementById('bookingForm').style.display='none';
   document.getElementById('bookingConfirm').style.display='block';
   const [y,m,d]=selectedDate.split('-');
@@ -377,7 +458,7 @@ async function confirmBooking() {
 }
 
 // ═══════════════════════════════════════════════
-//  EMAIL NOTIFICATION
+//  EMAIL
 // ═══════════════════════════════════════════════
 function sendCoachEmail(booking) {
   if(typeof emailjs==='undefined'||EMAILJS_SERVICE.includes('YOUR')){
