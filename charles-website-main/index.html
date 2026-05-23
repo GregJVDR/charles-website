@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Charles Machado — Coach Sportif</title>
+  <meta name="description" content="Coach sportif certifié BPJEPS. Programmes d'entraînement, réservation d'appel Teams et transformation physique avec Charles Machado."/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body class="dark-hero">
+
+  <canvas id="particleCanvas"></canvas>
+
+  <!-- NAVBAR -->
+  <nav id="mainNav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">C<span class="logo-dot">·</span>M</a>
+      <ul class="nav-links">
+        <li><a href="about.html">Charles</a></li>
+        <li><a href="#methode">Méthode</a></li>
+        <li><a href="#programmes">Programmes</a></li>
+        <li><a href="#reservation">Réservation</a></li>
+      </ul>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="#reservation" class="nav-login" onclick="goToLogin()">
+        <svg viewBox="0 0 20 20" fill="none" width="14" height="14"><circle cx="10" cy="7" r="3.4" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 17c0-3.6 2.9-6.5 6.5-6.5s6.5 2.9 6.5 6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        Connexion
+      </a>
+      <a href="#reservation" class="nav-cta">
+        <svg viewBox="0 0 16 16" fill="none" width="13" height="13"><rect x="1" y="3" width="14" height="11" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M5 1v4M11 1v4M1 7h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Réserver un appel
+      </a>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="about.html" onclick="closeMobileMenu()">Charles</a>
+      <a href="#methode" onclick="closeMobileMenu()">Méthode</a>
+      <a href="#programmes" onclick="closeMobileMenu()">Programmes</a>
+      <a href="#reservation" onclick="closeMobileMenu()">Réservation</a>
+      <a href="#reservation" onclick="goToLogin();closeMobileMenu()">Connexion</a>
+      <a href="#reservation" class="mobile-cta" onclick="closeMobileMenu()">Réserver un appel</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero" class="hero hero--dark">
+    <div class="hero-glow"></div>
+    <div class="hero-ghost" aria-hidden="true"><span>CHARLES</span><span>MACHADO</span></div>
+
+    <div class="hero-inner">
+      <div class="hero-left">
+        <h1 class="hero-title reveal">
+          <span class="title-first">Objectif</span>
+          <em class="title-em">Apollon</em>
+        </h1>
+        <p class="hero-subtitle reveal">
+          Programmes d'entraînement sur mesure pour forger un corps digne des dieux et atteindre vos objectifs.
+        </p>
+        <div class="hero-actions reveal">
+          <a href="#reservation" class="btn-primary">
+            Réserver un appel
+            <svg viewBox="0 0 20 20" fill="none" width="16" height="16"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#programmes" class="btn-ghost inv">Voir les programmes →</a>
+        </div>
+        <div class="hero-stats reveal" style="--delay:0.1s">
+          <div class="hero-stat-card">
+            <div class="hero-stat-num"><span class="count-up" data-target="100">0</span>+</div>
+            <div class="hero-stat-label">Athlètes transformés</div>
+          </div>
+          <div class="hero-stat-card">
+            <div class="hero-stat-num"><span class="count-up" data-target="5">0</span>+</div>
+            <div class="hero-stat-label">Ans d'expérience</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <img src="imagehyrox/charles-bras-croises.png" alt="Charles Machado" class="hero-photo" onerror="this.onerror=null;this.src='imagehyrox/charles-detoure.png'"/>
+      </div>
+    </div>
+
+    <div class="hero-scroll">
+      <span class="scroll-label">Défiler</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- BANDEAU DÉFILANT NÉON -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Coaching certifié BPJEPS</span><span class="marquee-star">✦</span>
+      <span>+100 athlètes transformés</span><span class="marquee-star">✦</span>
+      <span>Programmes sur mesure</span><span class="marquee-star">✦</span>
+      <span>Appel Teams offert</span><span class="marquee-star">✦</span>
+      <span>Objectif Apollon</span><span class="marquee-star">✦</span>
+      <span>Nutrition &amp; performance</span><span class="marquee-star">✦</span>
+      <span>Coaching certifié BPJEPS</span><span class="marquee-star">✦</span>
+      <span>+100 athlètes transformés</span><span class="marquee-star">✦</span>
+      <span>Programmes sur mesure</span><span class="marquee-star">✦</span>
+      <span>Appel Teams offert</span><span class="marquee-star">✦</span>
+      <span>Objectif Apollon</span><span class="marquee-star">✦</span>
+      <span>Nutrition &amp; performance</span><span class="marquee-star">✦</span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about" class="about">
+    <div class="section-inner">
+      <div class="about-split">
+
+        <div class="about-photo-col">
+          <div class="about-photo-frame reveal">
+            <img src="imagehyrox/hyrox.jpeg" alt="Charles Machado — HYROX" class="about-hyrox-img"/>
+          </div>
+        </div>
+
+        <div class="about-copy-col">
+          <span class="section-tag reveal">À propos</span>
+          <h2 class="section-title reveal">Une passion pour<br/><em>l'excellence</em></h2>
+          <p class="about-para reveal">
+            Charles Machado Da Silva est coach sportif certifié BPJEPS APT, spécialisé dans la préparation
+            athlétique et la performance fonctionnelle. Compétiteur HYROX et ancien athlète de haut niveau,
+            il a participé aux Championnats de France en 2017 (octathlon) et 2019 (4×100m).
+          </p>
+          <p class="about-para reveal" style="--delay:0.08s">
+            Sa méthode combine entraînement structuré, nutrition optimisée et suivi mental pour des résultats
+            durables. Chaque programme est conçu sur mesure, adapté à vos capacités et vos ambitions.
+          </p>
+
+          <div class="about-stats reveal" style="--delay:0.14s">
+            <div class="about-stat">
+              <span class="about-stat-num">100+</span>
+              <span class="about-stat-lbl">Athlètes transformés</span>
+            </div>
+            <div class="about-stat-div"></div>
+            <div class="about-stat">
+              <span class="about-stat-num">5+</span>
+              <span class="about-stat-lbl">Ans d'expérience</span>
+            </div>
+            <div class="about-stat-div"></div>
+            <div class="about-stat">
+              <span class="about-stat-num">BPJEPS</span>
+              <span class="about-stat-lbl">Certifié APT</span>
+            </div>
+          </div>
+
+          <div class="about-cta reveal" style="--delay:0.2s">
+            <a href="#reservation" class="btn-primary">
+              Réserver un appel
+              <svg viewBox="0 0 20 20" fill="none" width="16" height="16"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="about.html" class="about-more-link">
+              Voir le profil complet
+              <svg viewBox="0 0 16 16" fill="none" width="12" height="12"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- MÉTHODE -->
+  <section id="methode" class="methode">
+    <div class="methode-statue-bg">
+      <img src="imagehyrox/IMG_0140.JPG" alt="" onerror="this.style.display='none'"/>
+      <div class="methode-overlay"></div>
+    </div>
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <span class="section-tag">Ma méthode</span>
+        <h2 class="section-title">3 piliers pour<br/><em>forger votre corps</em></h2>
+        <p class="section-desc">Une approche digne des athlètes de l'Olympe</p>
+      </div>
+      <div class="methode-grid">
+        <div class="methode-card reveal">
+          <div class="methode-roman">I</div>
+          <div class="methode-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" width="26" height="26"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2M9 12h6M9 16h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Programme Personnalisé</h3>
+          <p>Un plan d'entraînement conçu spécifiquement pour vos objectifs, votre niveau et votre emploi du temps. Chaque séance forge votre corps.</p>
+        </div>
+        <div class="methode-card reveal" style="--delay:0.12s">
+          <div class="methode-roman">II</div>
+          <div class="methode-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" width="26" height="26"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Suivi en Temps Réel</h3>
+          <p>Accompagnement constant via Teams, analyse des performances et ajustements du programme en continu pour maximiser vos résultats.</p>
+        </div>
+        <div class="methode-card reveal" style="--delay:0.24s">
+          <div class="methode-roman">III</div>
+          <div class="methode-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" width="26" height="26"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" stroke="currentColor" stroke-width="1.8"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Nutrition & Mental</h3>
+          <p>Stratégies nutritionnelles adaptées et travail sur la mentalité pour des résultats qui durent bien au-delà de la compétition.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- QUOTE -->
+  <div class="quote-section">
+    <div class="quote-inner">
+      <div class="quote-ornament">——— ✦ ———</div>
+      <blockquote>« La discipline est le pont entre les objectifs<br/>et l'accomplissement. »</blockquote>
+      <div class="quote-ornament">——— ✦ ———</div>
+    </div>
+  </div>
+
+  <!-- FORMATIONS (blocs noir & jaune fluo) -->
+  <section id="programmes" class="formations">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <span class="section-tag">Nos formations</span>
+        <h2 class="section-title">3 parcours vers <em>l'Olympe</em></h2>
+        <p class="section-desc">Choisissez la formation adaptée à votre niveau et à vos ambitions. Accès immédiat, à vie.</p>
+      </div>
+
+      <div class="formations-grid">
+
+        <!-- 01 — Fondations -->
+        <article class="formation-card reveal">
+          <div class="formation-head">
+            <span class="formation-num">01</span>
+            <span class="formation-level">Débutant</span>
+          </div>
+          <h3 class="formation-name">Fondations</h3>
+          <p class="formation-dur">8 semaines</p>
+          <p class="formation-desc">Posez des bases solides : technique, hygiène de vie et votre première vraie transformation.</p>
+          <ul class="formation-list">
+            <li>Programme d'entraînement progressif</li>
+            <li>Bases nutritionnelles essentielles</li>
+            <li>Suivi de progression hebdomadaire</li>
+          </ul>
+          <div class="formation-foot">
+            <div class="formation-price">97 <span>€</span></div>
+            <button class="formation-btn" onclick="openPayment('fondations')">
+              Choisir
+              <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </article>
+
+        <!-- 02 — Olympus Elite (phare) -->
+        <article class="formation-card formation-card--featured reveal" style="--delay:0.1s">
+          <span class="formation-badge">Le plus complet</span>
+          <div class="formation-head">
+            <span class="formation-num">02</span>
+            <span class="formation-level">Complet</span>
+          </div>
+          <h3 class="formation-name">Olympus Elite</h3>
+          <p class="formation-dur">12 semaines</p>
+          <p class="formation-desc">La transformation totale : entraînement, nutrition sur mesure et coaching personnalisé avec Charles.</p>
+          <ul class="formation-list">
+            <li>Plan d'entraînement complet, semaine par semaine</li>
+            <li>Nutrition sur mesure + recettes performance</li>
+            <li>2 appels Teams avec Charles</li>
+            <li>Accès à vie + mises à jour futures</li>
+          </ul>
+          <div class="formation-foot">
+            <div class="formation-price">297 <span>€</span></div>
+            <button class="formation-btn" onclick="openPayment('olympus')">
+              Choisir
+              <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </article>
+
+        <!-- 03 — Titan Protocol -->
+        <article class="formation-card reveal" style="--delay:0.2s">
+          <div class="formation-head">
+            <span class="formation-num">03</span>
+            <span class="formation-level">Avancé</span>
+          </div>
+          <h3 class="formation-name">Titan Protocol</h3>
+          <p class="formation-dur">10 semaines</p>
+          <p class="formation-desc">Repoussez vos limites : intensité maximale, force et performance athlétique de haut niveau.</p>
+          <ul class="formation-list">
+            <li>Cycles de force &amp; puissance</li>
+            <li>Préparation physique avancée</li>
+            <li>Optimisation de la performance</li>
+          </ul>
+          <div class="formation-foot">
+            <div class="formation-price">197 <span>€</span></div>
+            <button class="formation-btn" onclick="openPayment('titan')">
+              Choisir
+              <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- RESERVATION -->
+  <section id="reservation" class="reservation">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="section-tag reveal">Réservation</span>
+        <h2 class="section-title reveal">Votre appel Teams<br/><em>sans engagement</em></h2>
+        <p class="section-desc reveal">Discutons de vos objectifs — Charles validera votre rendez-vous et vous enverra le lien Teams par email</p>
+      </div>
+
+      <div class="booking-wrapper reveal">
+
+        <div id="dbLoading" class="booking-loading">
+          <div class="spinner"></div>
+          <p>Connexion en cours…</p>
+        </div>
+
+        <div id="authContainer" style="display:none">
+          <div class="auth-header">
+            <div class="auth-icon">
+              <svg viewBox="0 0 48 48" fill="none" width="44" height="44">
+                <circle cx="24" cy="24" r="22" fill="#0A0A0A" opacity="0.10"/>
+                <circle cx="24" cy="24" r="22" stroke="#0A0A0A" stroke-width="1.5"/>
+                <circle cx="24" cy="19" r="6" stroke="#0A0A0A" stroke-width="1.8"/>
+                <path d="M12 38c0-6.627 5.373-12 12-12s12 5.373 12 12" stroke="#0A0A0A" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>Accédez à votre espace</h3>
+            <p>Connectez-vous ou créez un compte pour réserver votre appel</p>
+          </div>
+
+          <div class="auth-tabs-wrap">
+            <button class="auth-tab active" onclick="switchTab('login')">Connexion</button>
+            <button class="auth-tab" onclick="switchTab('register')">Créer un compte</button>
+          </div>
+
+          <div id="loginForm" class="auth-form">
+            <div class="form-group">
+              <label for="loginEmail">Email</label>
+              <input type="email" id="loginEmail" placeholder="votre@email.com" autocomplete="email"/>
+            </div>
+            <div class="form-group">
+              <label for="loginPwd">Mot de passe</label>
+              <input type="password" id="loginPwd" placeholder="••••••••" autocomplete="current-password"/>
+            </div>
+            <div id="loginError" class="form-error"></div>
+            <button class="btn-form-submit" onclick="login()">
+              Se connecter
+              <svg viewBox="0 0 20 20" fill="none" width="15" height="15"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+
+          <div id="registerForm" class="auth-form" style="display:none">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="regName">Prénom & Nom *</label>
+                <input type="text" id="regName" placeholder="Jean Dupont" autocomplete="name"/>
+              </div>
+              <div class="form-group">
+                <label for="regPhone">Téléphone</label>
+                <input type="tel" id="regPhone" placeholder="+33 6 00 00 00 00" autocomplete="tel"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="regEmail">Email *</label>
+              <input type="email" id="regEmail" placeholder="votre@email.com" autocomplete="email"/>
+            </div>
+            <div class="form-group">
+              <label for="regPwd">Mot de passe * <small>(6 car. min.)</small></label>
+              <input type="password" id="regPwd" placeholder="••••••••" autocomplete="new-password"/>
+            </div>
+            <div id="regError" class="form-error"></div>
+            <button class="btn-form-submit" onclick="register()">
+              Créer mon compte
+              <svg viewBox="0 0 20 20" fill="none" width="15" height="15"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div id="bookingContainer" style="display:none">
+          <div class="booking-user-bar">
+            <div class="booking-user-info">
+              <svg viewBox="0 0 20 20" fill="none" width="16" height="16"><circle cx="10" cy="7" r="3.5" stroke="#0A0A0A" stroke-width="1.5"/><path d="M3 17c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round"/></svg>
+              <span id="userWelcome"></span>
+            </div>
+            <button class="btn-logout" onclick="logout()">Déconnexion</button>
+          </div>
+
+          <div class="booking-tabs-wrap">
+            <button class="booking-tab active" onclick="switchBookingTab('new')">
+              <svg viewBox="0 0 16 16" fill="none" width="13" height="13"><rect x="1" y="2" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v6M5 8h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Nouveau RDV
+            </button>
+            <button class="booking-tab" onclick="switchBookingTab('mine')">
+              <svg viewBox="0 0 16 16" fill="none" width="13" height="13"><rect x="1" y="2" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M4 6h8M4 9h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Mes RDV
+            </button>
+          </div>
+
+          <div id="newBookingPanel">
+            <div class="booking-layout">
+              <div class="calendar-col">
+                <h4 class="booking-col-title">Choisissez une date</h4>
+                <div class="calendar">
+                  <div class="cal-nav">
+                    <button class="cal-nav-btn" onclick="changeMonth(-1)"><svg viewBox="0 0 16 16" fill="none" width="16" height="16"><path d="M10 12l-4-4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                    <span id="calMonthLabel" class="cal-month"></span>
+                    <button class="cal-nav-btn" onclick="changeMonth(1)"><svg viewBox="0 0 16 16" fill="none" width="16" height="16"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                  </div>
+                  <div class="cal-weekdays"><span>Lun</span><span>Mar</span><span>Mer</span><span>Jeu</span><span>Ven</span><span>Sam</span><span>Dim</span></div>
+                  <div id="calendarDays" class="cal-days"></div>
+                </div>
+                <div class="cal-legend">
+                  <span class="legend-item"><span class="legend-dot dot-partial"></span>Disponible</span>
+                  <span class="legend-item"><span class="legend-dot dot-full"></span>Complet</span>
+                </div>
+              </div>
+
+              <div class="slots-col">
+                <h4 class="booking-col-title">
+                  Créneaux disponibles
+                  <span id="selectedDateLabel" class="selected-date-badge"></span>
+                </h4>
+                <div id="slotsLoading" class="slots-loading" style="display:none">
+                  <div class="spinner-sm"></div>
+                  <span>Chargement…</span>
+                </div>
+                <div id="timeSlots" class="time-slots"></div>
+                <div id="bookingForm" class="booking-form" style="display:none">
+                  <div class="form-divider"></div>
+                  <h5>Complétez votre réservation</h5>
+                  <div class="form-group">
+                    <label for="bookGoal">Votre objectif *</label>
+                    <select id="bookGoal">
+                      <option value="">Choisissez votre objectif…</option>
+                      <option value="Préparation athlétique">Préparation athlétique</option>
+                      <option value="Coaching sportif général">Coaching sportif général</option>
+                      <option value="Nutrition & performance">Nutrition & performance</option>
+                      <option value="Remise en forme">Remise en forme</option>
+                      <option value="Préparation compétition">Préparation compétition</option>
+                      <option value="Autre">Autre</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="bookMsg">Message <span class="optional">(optionnel)</span></label>
+                    <textarea id="bookMsg" rows="3" placeholder="Votre niveau, vos attentes, vos questions…"></textarea>
+                  </div>
+                  <button id="confirmBtn" class="btn-form-submit" onclick="confirmBooking()">
+                    Confirmer le rendez-vous
+                    <svg viewBox="0 0 20 20" fill="none" width="15" height="15"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                </div>
+                <div id="bookingConfirm" class="booking-success" style="display:none">
+                  <div class="success-icon-wrap">
+                    <svg viewBox="0 0 48 48" fill="none" width="48" height="48">
+                      <circle cx="24" cy="24" r="21" fill="#0A0A0A" opacity="0.10"/>
+                      <circle cx="24" cy="24" r="21" stroke="#0A0A0A" stroke-width="1.8"/>
+                      <path d="M15 24l7 7 11-14" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                  <h4>Demande envoyée !</h4>
+                  <p id="bookingConfirmText" class="confirm-details"></p>
+                  <p class="confirm-note">Charles examinera votre demande et vous enverra le lien Microsoft Teams par email avant votre appel.</p>
+                  <button class="btn-ghost-sm" onclick="switchBookingTab('mine')">Voir mes rendez-vous →</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="myBookingsPanel" style="display:none">
+            <div id="myBookingsList" class="my-bookings-list"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-statue-bg">
+      <img src="imagehyrox/d7976a2268e4c8c1a2db21651fcb3b32.jpg" alt="" onerror="this.style.display='none'"/>
+      <div class="footer-overlay"></div>
+    </div>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">C<span class="logo-dot">·</span>M</a>
+        <p>Coach Sportif · Préparation physique<br/>& performance athlétique</p>
+      </div>
+      <div class="footer-col">
+        <h5>Navigation</h5>
+        <a href="about.html">Charles</a>
+        <a href="#methode">Méthode</a>
+        <a href="#programmes">Programmes</a>
+        <a href="#reservation">Réservation</a>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <a href="mailto:charlesmachadopro@gmail.com">charlesmachadopro@gmail.com</a>
+        <p class="footer-note">Appel Teams · Validation sous 24h</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Charles Machado Da Silva · Tous droits réservés</p>
+      <span class="footer-ornament">——— ✦ ———</span>
+    </div>
+  </footer>
+
+  <!-- MODAL PAIEMENT -->
+  <div id="paymentModal" class="modal" onclick="closeIfBg(event,'paymentModal')">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('paymentModal')">
+        <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M12 4L4 12M4 4l8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+      <h3 id="modalTitle"></h3>
+      <p class="modal-price" id="modalPrice"></p>
+      <form onsubmit="processPayment(event)" class="payment-form">
+        <div class="form-group"><label>Titulaire</label><input type="text" placeholder="Jean Dupont" required/></div>
+        <div class="form-group"><label>Numéro de carte</label><input type="text" placeholder="•••• •••• •••• ••••" oninput="formatCard(this)" required/></div>
+        <div class="form-row">
+          <div class="form-group"><label>Expiration</label><input type="text" placeholder="MM/AA" oninput="formatExpiry(this)" required/></div>
+          <div class="form-group"><label>CVV</label><input type="text" placeholder="•••" maxlength="3" required/></div>
+        </div>
+        <button type="submit" id="payBtn" class="btn-form-submit"></button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL CONFIRMATION -->
+  <div id="confirmModal" class="modal" onclick="closeIfBg(event,'confirmModal')">
+    <div class="modal-box modal-box--center">
+      <svg viewBox="0 0 48 48" fill="none" width="48" height="48">
+        <circle cx="24" cy="24" r="21" fill="#0A0A0A" opacity="0.10"/>
+        <circle cx="24" cy="24" r="21" stroke="#0A0A0A" stroke-width="1.8"/>
+        <path d="M15 24l7 7 11-14" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h3>Paiement confirmé !</h3>
+      <p>Merci pour votre confiance. Vous recevrez un email de confirmation avec votre programme.</p>
+      <button class="btn-form-submit" onclick="closeModal('confirmModal')">Fermer</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

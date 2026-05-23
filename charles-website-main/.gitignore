@@ -1,0 +1,12 @@
+# Outillage local Claude Code (pas le site)
+.claude/
+
+# Système
+.DS_Store
+Thumbs.db
+*.log
+
+# Éditeurs
+.vscode/
+.idea/
+*.swp

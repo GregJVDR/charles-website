@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Charles Machado — Qui suis-je ?</title>
+  <meta name="description" content="Découvrez l'histoire de Charles Machado Da Silva : athlète de haut niveau, champion régional, coach certifié BPJEPS et formateur de corps d'exception."/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <canvas id="particleCanvas"></canvas>
+
+  <!-- NAVBAR -->
+  <nav id="mainNav" class="nav-dark">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">C<span class="logo-dot">·</span>M</a>
+      <ul class="nav-links">
+        <li><a href="about.html" style="color:#0A0A0A;text-decoration:underline;text-underline-offset:5px">Charles</a></li>
+        <li><a href="index.html#methode">Méthode</a></li>
+        <li><a href="index.html#programmes">Programmes</a></li>
+        <li><a href="index.html#reservation">Réservation</a></li>
+      </ul>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="index.html#reservation" class="nav-login">
+        <svg viewBox="0 0 20 20" fill="none" width="14" height="14"><circle cx="10" cy="7" r="3.4" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 17c0-3.6 2.9-6.5 6.5-6.5s6.5 2.9 6.5 6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        Connexion
+      </a>
+      <a href="index.html#reservation" class="nav-cta">
+        <svg viewBox="0 0 16 16" fill="none" width="13" height="13"><rect x="1" y="3" width="14" height="11" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M5 1v4M11 1v4M1 7h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Réserver un appel
+      </a>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="about.html" onclick="closeMobileMenu()">Charles</a>
+      <a href="index.html#methode" onclick="closeMobileMenu()">Méthode</a>
+      <a href="index.html#programmes" onclick="closeMobileMenu()">Programmes</a>
+      <a href="index.html#reservation" onclick="closeMobileMenu()">Réservation</a>
+      <a href="index.html#reservation" onclick="closeMobileMenu()">Connexion</a>
+      <a href="index.html#reservation" class="mobile-cta" onclick="closeMobileMenu()">Réserver un appel</a>
+    </div>
+  </nav>
+
+  <!-- HERO DE LA PAGE ABOUT -->
+  <section class="about-hero">
+    <div class="about-hero-bg">
+      <img src="imagehyrox/IMG_1162.jpeg" alt="Charles Machado" onerror="this.style.display='none'"/>
+      <div class="about-hero-vignette"></div>
+    </div>
+    <div class="about-hero-content">
+      <span class="section-tag">Qui suis-je ?</span>
+      <h1 class="about-hero-name">
+        Charles Machado
+        <em>Da Silva</em>
+      </h1>
+      <p class="about-hero-tagline">
+        Athlète de haut niveau · Champion régional · Coach certifié BPJEPS<br/>
+        Je forge des corps d'exception depuis plus de 5 ans.
+      </p>
+    </div>
+    <div class="about-hero-scroll">
+      <span class="scroll-label">Découvrir</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- BANDEAU DÉFILANT NÉON -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Athlète de haut niveau</span><span class="marquee-star">✦</span>
+      <span>Champion régional</span><span class="marquee-star">✦</span>
+      <span>Certifié BPJEPS APT</span><span class="marquee-star">✦</span>
+      <span>Champ. de France 2017 &amp; 2019</span><span class="marquee-star">✦</span>
+      <span>+5 ans d'expérience</span><span class="marquee-star">✦</span>
+      <span>+100 athlètes coachés</span><span class="marquee-star">✦</span>
+      <span>Athlète de haut niveau</span><span class="marquee-star">✦</span>
+      <span>Champion régional</span><span class="marquee-star">✦</span>
+      <span>Certifié BPJEPS APT</span><span class="marquee-star">✦</span>
+      <span>Champ. de France 2017 &amp; 2019</span><span class="marquee-star">✦</span>
+      <span>+5 ans d'expérience</span><span class="marquee-star">✦</span>
+      <span>+100 athlètes coachés</span><span class="marquee-star">✦</span>
+    </div>
+  </div>
+
+  <!-- SECTION : L'HOMME -->
+  <section class="story-section story-section--white">
+    <div class="section-inner">
+      <div class="story-grid">
+        <div class="story-img-wrap reveal">
+          <img src="imagehyrox/IMG_0140.JPG" alt="Charles Machado — entraînement" loading="lazy" onerror="this.parentElement.style.background='#e8e2d8'"/>
+        </div>
+        <div class="story-content">
+          <span class="section-tag reveal">L'homme</span>
+          <h2 class="section-title reveal">Né pour<br/><em>performer</em></h2>
+          <p class="story-text reveal">
+            Depuis l'enfance, l'athlétisme est ma langue maternelle. Né avec une passion innée pour
+            le dépassement de soi, j'ai très tôt compris que le corps humain n'est pas une limite —
+            c'est une toile vierge sur laquelle on sculpe son caractère.
+          </p>
+          <p class="story-text reveal" style="--delay:0.1s">
+            Mes années de compétition m'ont forgé autant mentalement que physiquement. Les matins glacials
+            à l'entraînement, les douleurs musculaires, les échecs et les victoires — tout cela a construit
+            l'homme que je suis aujourd'hui : discipliné, méthodique, et profondément convaincu que
+            chacun porte en lui un athlète qui n'attend que d'être réveillé.
+          </p>
+          <p class="story-text reveal" style="--delay:0.15s">
+            Je suis Charles Machado Da Silva. Coach sportif certifié BPJEPS APT, préparateur physique,
+            et avant tout — quelqu'un qui croit en vous plus fort que vous ne le faites vous-même.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- SECTION : CARRIÈRE ATHLÉTIQUE (fond sombre) -->
+  <section class="career-section">
+    <div class="career-bg">
+      <img src="imagehyrox/statue.png" alt="" onerror="this.style.display='none'"/>
+      <div class="career-bg-overlay"></div>
+    </div>
+    <div class="section-inner">
+      <div class="career-inner">
+        <span class="section-tag reveal">Carrière athlétique</span>
+        <h2 class="section-title inv reveal">Une trajectoire<br/><em>vers l'excellence</em></h2>
+        <p class="section-desc inv reveal" style="--delay:0.1s">
+          Des Championnats de France aux podiums régionaux — un parcours construit dans la discipline et la persévérance.
+        </p>
+
+        <div class="timeline">
+
+          <div class="timeline-item reveal" style="--delay:0.15s">
+            <div class="timeline-year">2023</div>
+            <div class="timeline-content">
+              <h4>Champion Départemental — 60m en salle</h4>
+              <p>Titre de champion départemental sur 60 mètres en salle. Une victoire qui confirme le niveau d'élite maintenu après les années de compétition nationale.</p>
+              <span class="timeline-medal">1ère place</span>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal" style="--delay:0.2s">
+            <div class="timeline-year">2020</div>
+            <div class="timeline-content">
+              <h4>Champion Régional — 200 mètres</h4>
+              <p>Titre de champion régional sur 200 mètres. Une saison marquée par la régularité et l'intensité des entraînements malgré un contexte difficile.</p>
+              <span class="timeline-medal">1ère place</span>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal" style="--delay:0.25s">
+            <div class="timeline-year">2019</div>
+            <div class="timeline-content">
+              <h4>Championnats de France — 4×100 mètres</h4>
+              <p>Participation aux Championnats de France sur le relais 4×100 mètres. Une compétition au niveau national qui exige autant de coordination collective que de vitesse individuelle.</p>
+              <span class="timeline-medal">National</span>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal" style="--delay:0.3s">
+            <div class="timeline-year">2017</div>
+            <div class="timeline-content">
+              <h4>Championnats de France — Octathlon</h4>
+              <p>Participation aux Championnats de France en octathlon — la discipline reine qui teste toutes les dimensions athlétiques : vitesse, force, endurance, coordination et mental d'acier.</p>
+              <span class="timeline-medal">National</span>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal" style="--delay:0.35s">
+            <div class="timeline-year">2015–</div>
+            <div class="timeline-content">
+              <h4>Début en athlétisme de haut niveau</h4>
+              <p>Les premières années de compétition qui posent les fondations d'une carrière athlétique : discipline quotidienne, perfectionnement technique et construction d'une mentalité de champion.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE PHILOSOPHIE -->
+  <div class="philosophy-section">
+    <div class="section-inner">
+      <p class="philosophy-quote reveal">
+        « Le corps suit toujours ce que l'esprit lui ordonne.<br/>
+        Mon rôle est de vous apprendre à commander. »
+      </p>
+      <p class="philosophy-attr reveal" style="--delay:0.15s">— Charles Machado Da Silva</p>
+    </div>
+  </div>
+
+  <!-- SECTION : L'ATHLÈTE DEVIENT COACH -->
+  <section class="story-section story-section--statue2">
+    <div class="section-inner">
+      <div class="story-grid reverse">
+        <div class="story-img-wrap reveal">
+          <img src="imagehyrox/IMG_0145.JPG" alt="Charles Machado coaching" loading="lazy" onerror="this.parentElement.style.background='#e8e2d8'"/>
+        </div>
+        <div class="story-content">
+          <span class="section-tag reveal">La transition</span>
+          <h2 class="section-title reveal">L'athlète devient<br/><em>formateur</em></h2>
+          <p class="story-text reveal">
+            Après des années à vivre de l'intérieur ce que signifie s'entraîner au plus haut niveau,
+            j'ai ressenti une évidence : transmettre. Non pas seulement les techniques, mais l'état
+            d'esprit. Le feu intérieur. Cette certitude que les limites n'existent que dans la tête.
+          </p>
+          <p class="story-text reveal" style="--delay:0.1s">
+            J'ai obtenu ma certification BPJEPS APT (Brevet Professionnel de la Jeunesse,
+            de l'Éducation Populaire et du Sport — Activités Physiques pour Tous) pour poser
+            sur des bases professionnelles ce que l'expérience m'avait appris sur le terrain.
+          </p>
+          <p class="story-text reveal" style="--delay:0.15s">
+            Depuis, plus de 100 athlètes ont franchi leur seuil, brisé leurs limites et
+            transformé leur rapport au corps. Chaque réussite de mes clients est la mienne aussi.
+            C'est pour ça que je fais ce métier.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREDENTIALS -->
+  <section class="credentials-section">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <span class="section-tag">Certifications & expertise</span>
+        <h2 class="section-title">Des fondations<br/><em>solides comme le marbre</em></h2>
+        <p class="section-desc">Chaque programme repose sur une expertise reconnue et des années de pratique au plus haut niveau</p>
+      </div>
+      <div class="credentials-grid">
+
+        <div class="credential-card reveal">
+          <div class="credential-icon">
+            <svg viewBox="0 0 24 24" fill="none" width="26" height="26"><path d="M12 2L3 7l9 5 9-5-9-5zM3 17l9 5 9-5M3 12l9 5 9-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>BPJEPS APT</h3>
+          <p>Brevet Professionnel reconnu par l'État, spécialité Activités Physiques pour Tous. La référence nationale pour le coaching sportif en France.</p>
+        </div>
+
+        <div class="credential-card reveal" style="--delay:0.1s">
+          <div class="credential-icon">
+            <svg viewBox="0 0 24 24" fill="none" width="26" height="26"><path d="M8 7a4 4 0 108 0 4 4 0 00-8 0zM3 20a7 7 0 0114 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Préparation Athlétique</h3>
+          <p>Spécialisation en préparation physique et fonctionnelle. 5+ années d'expérience avec des athlètes de tous niveaux, du débutant au compétiteur national.</p>
+        </div>
+
+        <div class="credential-card reveal" style="--delay:0.2s">
+          <div class="credential-icon">
+            <svg viewBox="0 0 24 24" fill="none" width="26" height="26"><path d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Athlétisme Haut Niveau</h3>
+          <p>Compétiteur national en sprint, relais et octathlon. Cette expérience pratique au sommet nourrit chaque programme de coaching avec une vérité que les manuels ne peuvent pas enseigner.</p>
+        </div>
+
+        <div class="credential-card reveal" style="--delay:0.1s">
+          <div class="credential-icon">
+            <svg viewBox="0 0 24 24" fill="none" width="26" height="26"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 8v4l3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Suivi Personnalisé</h3>
+          <p>Chaque client est unique. J'adapte chaque programme à votre morphologie, votre emploi du temps, vos objectifs et votre niveau — aucun plan générique, aucun compromis.</p>
+        </div>
+
+        <div class="credential-card reveal" style="--delay:0.15s">
+          <div class="credential-icon">
+            <svg viewBox="0 0 24 24" fill="none" width="26" height="26"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Nutrition & Performance</h3>
+          <p>La performance naît dans l'assiette autant qu'à la salle. Mes plans nutritionnels sont conçus pour optimiser la récupération, la composition corporelle et l'énergie disponible.</p>
+        </div>
+
+        <div class="credential-card reveal" style="--delay:0.2s">
+          <div class="credential-icon">
+            <svg viewBox="0 0 24 24" fill="none" width="26" height="26"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Mental & Mindset</h3>
+          <p>La transformation physique commence dans la tête. J'intègre des stratégies de préparation mentale dans chaque programme pour bâtir la résilience, la discipline et la confiance.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- GALERIE PHOTOS -->
+  <section class="about-gallery-section">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <span class="section-tag">Galerie</span>
+        <h2 class="section-title">L'athlète<br/><em>en images</em></h2>
+      </div>
+      <div class="about-gallery-grid reveal">
+        <div class="about-gallery-item">
+          <img src="imagehyrox/IMG_0144.JPG" alt="Charles Machado en compétition" loading="lazy" onerror="this.style.display='none'"/>
+        </div>
+        <div class="about-gallery-item">
+          <img src="imagehyrox/IMG_0140.JPG" alt="Charles Machado" loading="lazy" onerror="this.style.display='none'"/>
+        </div>
+        <div class="about-gallery-item">
+          <img src="imagehyrox/IMG_0142.JPG" alt="Charles Machado entraînement" loading="lazy" onerror="this.style.display='none'"/>
+        </div>
+        <div class="about-gallery-item">
+          <img src="imagehyrox/IMG_0145.JPG" alt="Charles Machado performance" loading="lazy" onerror="this.style.display='none'"/>
+        </div>
+        <div class="about-gallery-item">
+          <img src="imagehyrox/IMG_1169.jpeg" alt="Charles Machado athlétisme" loading="lazy" onerror="this.style.display='none'"/>
+        </div>
+        <div class="about-gallery-item">
+          <img src="imagehyrox/68129efce28afbc301658fcef04aaa54.jpg" alt="Charles Machado" loading="lazy" onerror="this.style.display='none'"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL (fond sombre) -->
+  <section class="about-cta-section">
+    <div class="section-inner">
+      <span class="section-tag reveal" style="justify-content:center;display:flex">Prêt à transformer votre corps ?</span>
+      <h2 class="section-title inv reveal" style="text-align:center">Commençons<br/><em>votre odyssée</em></h2>
+      <p class="section-desc inv reveal" style="--delay:0.1s">
+        Réservez un appel Teams gratuit avec Charles. Ensemble, nous définirons vos objectifs et bâtirons la stratégie qui vous mènera à votre meilleur physique.
+      </p>
+      <div class="cta-actions reveal" style="--delay:0.2s">
+        <a href="index.html#reservation" class="btn-primary">
+          Réserver un appel Teams
+          <svg viewBox="0 0 20 20" fill="none" width="16" height="16"><rect x="1" y="3" width="14" height="11" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M15 7l4-2v8l-4-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="index.html#programmes" class="btn-ghost inv">
+          Voir les programmes →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-statue-bg">
+      <img src="imagehyrox/d7976a2268e4c8c1a2db21651fcb3b32.jpg" alt="" onerror="this.style.display='none'"/>
+      <div class="footer-overlay"></div>
+    </div>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">C<span class="logo-dot">·</span>M</a>
+        <p>Coach Sportif · Préparation physique<br/>& performance athlétique</p>
+      </div>
+      <div class="footer-col">
+        <h5>Navigation</h5>
+        <a href="about.html">Charles</a>
+        <a href="index.html#methode">Méthode</a>
+        <a href="index.html#programmes">Programmes</a>
+        <a href="index.html#reservation">Réservation</a>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <a href="mailto:charlesmachadopro@gmail.com">charlesmachadopro@gmail.com</a>
+        <p class="footer-note">Appel Teams · Validation sous 24h</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Charles Machado Da Silva · Tous droits réservés</p>
+      <span class="footer-ornament">——— ✦ ———</span>
+    </div>
+  </footer>
+
+  <script>
+  // Navbar + reveal partagés avec index.html
+  function closeMobileMenu() {
+    var menu = document.getElementById('mobileMenu');
+    var btn  = document.getElementById('hamburger');
+    if (menu) menu.classList.remove('open');
+    if (btn)  btn.classList.remove('open');
+  }
+
+  (function initNav() {
+    var nav  = document.getElementById('mainNav');
+    var btn  = document.getElementById('hamburger');
+    var menu = document.getElementById('mobileMenu');
+    window.addEventListener('scroll', function() {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+    if (btn && menu) {
+      btn.addEventListener('click', function() {
+        btn.classList.toggle('open');
+        menu.classList.toggle('open');
+      });
+    }
+    document.addEventListener('click', function(e) {
+      if (menu && menu.classList.contains('open') && !nav.contains(e.target)) closeMobileMenu();
+    });
+  })();
+
+  (function initReveal() {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(x) { if (x.isIntersecting) x.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(function(r) { observer.observe(r); });
+  })();
+
+  (function initParticles() {
+    var canvas = document.getElementById('particleCanvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var W, H;
+    function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+    resize();
+    window.addEventListener('resize', resize);
+    var NUM = window.innerWidth < 768 ? 25 : 50;
+    var particles = Array.from({length: NUM}, function() {
+      return {
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        r: Math.random() * 1.4 + 0.3,
+        dx: (Math.random() - 0.5) * 0.25,
+        dy: -Math.random() * 0.4 - 0.1,
+        opacity: Math.random() * 0.45 + 0.1,
+        flicker: Math.random() * Math.PI * 2
+      };
+    });
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      particles.forEach(function(p) {
+        p.x += p.dx; p.y += p.dy; p.flicker += 0.03;
+        if (p.y < -4) p.y = H + 4;
+        if (p.x < -4) p.x = W + 4;
+        if (p.x > W + 4) p.x = -4;
+        var op = p.opacity * (0.6 + 0.4 * Math.sin(p.flicker));
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(20,20,20,' + op + ')';
+        ctx.fill();
+      });
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+  </script>
+</body>
+</html>
