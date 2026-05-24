@@ -365,7 +365,11 @@ select, input, textarea { font-family: inherit; }
   overflow: hidden;
   background: var(--bg);
 }
-.hero--dark { background: radial-gradient(125% 95% at 72% 18%, #15160d 0%, #0B0B0B 52%, #070707 100%); }
+.hero--dark {
+  background:
+    radial-gradient(125% 95% at 72% 18%, rgba(21,22,13,.90) 0%, rgba(11,11,11,.94) 52%, rgba(7,7,7,.97) 100%),
+    url('imagehyrox/blue3.png') center / cover no-repeat;
+}
 .hero-glow {
   position: absolute;
   top: -14%; right: -8%;
@@ -2806,6 +2810,95 @@ blockquote {
               0 8px 24px rgba(0,0,0,0.07),
               inset 0 1.5px 0 rgba(255,255,255,1) !important;
   border-radius: 28px !important;
+}
+
+/* ── BANDEAU SOUS NAV ── */
+.subnav-band {
+  position: fixed;
+  top: var(--nav-h);
+  left: 0; right: 0;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: rgba(255,255,255,.18);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(255,255,255,.2);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.35),
+              0 2px 12px rgba(0,0,0,.06);
+  z-index: 99;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  overflow: hidden;
+  border-top: 1px solid rgba(59,130,246,.3);
+  border-bottom: 1px solid rgba(59,130,246,.18);
+  box-shadow: 0 0 10px rgba(59,130,246,.12),
+              inset 0 0 24px rgba(59,130,246,.06);
+}
+
+/* Beam scanner aller */
+.subnav-band::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 100px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(59,130,246,.25) 50%,
+    transparent 100%);
+  filter: blur(3px);
+  animation: snb-scan 2.8s linear infinite;
+}
+
+/* Beam retour */
+.subnav-band::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 60px;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(59,130,246,.15),
+    transparent);
+  filter: blur(2px);
+  animation: snb-scan-back 4.5s linear infinite 1s;
+}
+
+@keyframes snb-scan {
+  from { left: -100px; }
+  to   { left: 110%; }
+}
+@keyframes snb-scan-back {
+  from { right: -60px; left: auto; }
+  to   { right: 110%; left: auto; }
+}
+
+/* Orbes néon */
+.snb-orb {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background: var(--neon);
+  filter: blur(5px);
+}
+.snb-orb--1 { width:7px;  height:7px;  left:8%;  animation: snb-pulse 2.1s ease-in-out infinite; }
+.snb-orb--2 { width:5px;  height:5px;  left:24%; animation: snb-pulse 1.7s ease-in-out infinite 0.4s; opacity:.5; }
+.snb-orb--3 { width:9px;  height:9px;  left:50%; animation: snb-pulse 2.6s ease-in-out infinite 0.9s; }
+.snb-orb--4 { width:5px;  height:5px;  left:74%; animation: snb-pulse 1.9s ease-in-out infinite 0.3s; opacity:.5; }
+.snb-orb--5 { width:7px;  height:7px;  left:90%; animation: snb-pulse 2.3s ease-in-out infinite 1.1s; }
+
+@keyframes snb-pulse {
+  0%,100% { opacity:.3; box-shadow: 0 0 4px  var(--neon-glow); transform: translateY(-50%) scale(1);    }
+  50%     { opacity:.8; box-shadow: 0 0 12px rgba(59,130,246,.7); transform: translateY(-50%) scale(1.4); }
+}
+
+.subnav-band.hidden {
+  opacity: 0;
+  transform: translateY(-100%);
 }
 
 /* ── SCROLL PROGRESS ── */

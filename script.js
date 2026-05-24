@@ -210,11 +210,14 @@ function initCursorGlow() {
 //  SCROLL PROGRESS BAR
 // ═══════════════════════════════════════════════
 function initScrollProgress() {
-  const bar = document.getElementById('scrollProgress');
+  const bar  = document.getElementById('scrollProgress');
+  const band = document.getElementById('subnavBand');
   if (!bar) return;
   window.addEventListener('scroll', () => {
+    const sy  = window.scrollY;
     const max = document.documentElement.scrollHeight - window.innerHeight;
-    bar.style.width = (window.scrollY / max * 100) + '%';
+    bar.style.width = (sy / max * 100) + '%';
+    if (band) band.classList.toggle('hidden', sy > 40);
   }, { passive: true });
 }
 
