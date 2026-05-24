@@ -14,6 +14,42 @@ const COACH_EMAIL      = 'charlesmachadopro@gmail.com';
 let sb = null;
 let currentUser = null;
 
+function showPanel(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.style.display = 'block';
+}
+
+function initBookingReveal() {
+  const wrapper = document.querySelector('.booking-wrapper');
+  if (!wrapper) return;
+
+  const hide = () => {
+    wrapper.style.opacity   = '0';
+    wrapper.style.transform = 'scale(0.9) translateY(60px)';
+    wrapper.style.filter    = 'blur(16px)';
+    wrapper.style.transition = 'none';
+  };
+
+  const show = () => {
+    wrapper.style.transition = 'opacity 0.9s cubic-bezier(0.34,1.56,0.64,1), transform 0.9s cubic-bezier(0.34,1.56,0.64,1), filter 0.55s ease';
+    wrapper.style.opacity    = '1';
+    wrapper.style.transform  = 'scale(1) translateY(0)';
+    wrapper.style.filter     = 'blur(0px)';
+  };
+
+  hide();
+
+  const obs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      obs.disconnect();
+      requestAnimationFrame(() => requestAnimationFrame(show));
+    }
+  }, { threshold: 0.18 });
+
+  obs.observe(wrapper);
+}
+
 async function initApp() {
   // Safety timeout — never block UI more than 3s
   const loadingTimeout = setTimeout(() => {
@@ -21,7 +57,7 @@ async function initApp() {
     const auth    = document.getElementById('authContainer');
     if (loading && loading.style.display !== 'none') {
       loading.style.display = 'none';
-      if (auth) auth.style.display = 'block';
+      if (auth) showPanel('authContainer');
     }
   }, 3000);
 
@@ -38,7 +74,7 @@ async function initApp() {
   }
   clearTimeout(loadingTimeout);
   document.getElementById('dbLoading').style.display = 'none';
-  document.getElementById('authContainer').style.display = 'block';
+  showPanel('authContainer');
 }
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -47,7 +83,298 @@ window.addEventListener('DOMContentLoaded', () => {
   initReveal();
   initCountUp();
   initParticles();
+  initCarousel();
+  initSwipeSlider();
+  initBookingReveal();
+  initFormationCards();
+  initCursorGlow();
+  initScrollProgress();
+  initTilt3D();
+  initMagnetic();
+  initParallax();
+  initRipple();
 });
+
+// ═══════════════════════════════════════════════
+//  CAROUSEL HYROX
+// ═══════════════════════════════════════════════
+function initCarousel() {
+  const frame = document.getElementById('hyroxCarousel');
+  if (!frame) return;
+
+  const slides = Array.from(frame.querySelectorAll('.carousel-slide'));
+  const dotsContainer = document.getElementById('hyroxDots');
+  const prevBtn = frame.querySelector('.carousel-prev');
+  const nextBtn = frame.querySelector('.carousel-next');
+
+  let current = 0;
+  let timer = null;
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Photo ' + (i + 1));
+    dot.addEventListener('click', () => { goTo(i); resetTimer(); });
+    dotsContainer.appendChild(dot);
+  });
+
+  function goTo(n) {
+    slides[current].classList.remove('active');
+    dotsContainer.children[current].classList.remove('active');
+    current = (n + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dotsContainer.children[current].classList.add('active');
+  }
+
+  function resetTimer() {
+    clearInterval(timer);
+    timer = setInterval(() => goTo(current + 1), 4000);
+  }
+
+  prevBtn.addEventListener('click', () => { goTo(current - 1); resetTimer(); });
+  nextBtn.addEventListener('click', () => { goTo(current + 1); resetTimer(); });
+
+  frame.addEventListener('mouseenter', () => clearInterval(timer));
+  frame.addEventListener('mouseleave', () => resetTimer());
+
+  resetTimer();
+}
+
+// ═══════════════════════════════════════════════
+//  FORMATION CARDS — ENTRÉE DEPUIS LE BAS
+// ═══════════════════════════════════════════════
+function initFormationCards() {
+  const cards = document.querySelectorAll('.formations-grid .formation-card');
+  if (!cards.length) return;
+
+  cards.forEach(card => {
+    card.style.opacity   = '0';
+    card.style.transform = 'translateY(90px) scale(0.93)';
+    card.style.transition = 'none';
+  });
+
+  const obs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      obs.disconnect();
+      cards.forEach((card, i) => {
+        setTimeout(() => {
+          card.style.transition = 'opacity 0.8s cubic-bezier(0.34,1.56,0.64,1), transform 0.8s cubic-bezier(0.34,1.56,0.64,1)';
+          card.style.opacity    = '1';
+          card.style.transform  = 'translateY(0) scale(1)';
+        }, i * 160);
+      });
+    }
+  }, { threshold: 0.12 });
+
+  obs.observe(document.querySelector('.formations-grid'));
+}
+
+// ═══════════════════════════════════════════════
+//  CURSOR GLOW (formations section uniquement)
+// ═══════════════════════════════════════════════
+function initCursorGlow() {
+  const glow       = document.getElementById('cursorGlow');
+  const formations = document.getElementById('programmes');
+  if (!glow || !formations || window.matchMedia('(pointer:coarse)').matches) return;
+
+  let tx = -999, ty = -999, x = -999, y = -999, active = false;
+
+  formations.addEventListener('mouseenter', () => {
+    active = true;
+    glow.style.opacity = '1';
+  });
+  formations.addEventListener('mouseleave', () => {
+    active = false;
+    glow.style.opacity = '0';
+  });
+
+  document.addEventListener('mousemove', e => {
+    if (!active) return;
+    tx = e.clientX;
+    ty = e.clientY;
+  });
+
+  glow.style.opacity = '0';
+  glow.style.transition = 'opacity 0.5s ease';
+
+  (function animate() {
+    x += (tx - x) * 0.07;
+    y += (ty - y) * 0.07;
+    glow.style.left = x + 'px';
+    glow.style.top  = y + 'px';
+    requestAnimationFrame(animate);
+  })();
+}
+
+// ═══════════════════════════════════════════════
+//  SCROLL PROGRESS BAR
+// ═══════════════════════════════════════════════
+function initScrollProgress() {
+  const bar = document.getElementById('scrollProgress');
+  if (!bar) return;
+  window.addEventListener('scroll', () => {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (window.scrollY / max * 100) + '%';
+  }, { passive: true });
+}
+
+// ═══════════════════════════════════════════════
+//  3D TILT SUR CARDS
+// ═══════════════════════════════════════════════
+function initTilt3D() {
+  const cards = document.querySelectorAll('.methode-card, .formation-card, .hero-stat-card');
+  if (window.matchMedia('(pointer:coarse)').matches) return;
+  cards.forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r   = card.getBoundingClientRect();
+      const dx  = (e.clientX - r.left - r.width  / 2) / (r.width  / 2);
+      const dy  = (e.clientY - r.top  - r.height / 2) / (r.height / 2);
+      const max = card.classList.contains('hero-stat-card') ? 8 : 5;
+      card.style.transform = `perspective(900px) rotateY(${dx*max}deg) rotateX(${-dy*max}deg) translateZ(10px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transition = 'transform 0.6s cubic-bezier(0.34,1.56,0.64,1)';
+      card.style.transform  = '';
+      setTimeout(() => { card.style.transition = ''; }, 620);
+    });
+    card.addEventListener('mouseenter', () => {
+      card.style.transition = 'transform 0.1s ease';
+    });
+  });
+}
+
+// ═══════════════════════════════════════════════
+//  MAGNETIC BUTTONS
+// ═══════════════════════════════════════════════
+function initMagnetic() {
+  if (window.matchMedia('(pointer:coarse)').matches) return;
+  const btns = document.querySelectorAll('.btn-primary, .nav-cta, .formation-btn');
+  btns.forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const r  = btn.getBoundingClientRect();
+      const dx = (e.clientX - r.left - r.width  / 2) * 0.28;
+      const dy = (e.clientY - r.top  - r.height / 2) * 0.28;
+      btn.style.transform = `translate(${dx}px, ${dy}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transition = 'transform 0.5s cubic-bezier(0.34,1.56,0.64,1)';
+      btn.style.transform  = '';
+      setTimeout(() => { btn.style.transition = ''; }, 520);
+    });
+    btn.addEventListener('mouseenter', () => {
+      btn.style.transition = 'transform 0.1s ease, background 0.35s, color 0.35s, box-shadow 0.35s';
+    });
+  });
+}
+
+// ═══════════════════════════════════════════════
+//  PARALLAX SCROLL
+// ═══════════════════════════════════════════════
+function initParallax() {
+  const layers = [
+    { sel: '.hero-photo',  speed:  0.06 },
+    { sel: '.halter-wrap', speed: -0.09 },
+  ];
+  const els = layers.map(l => ({ el: document.querySelector(l.sel), speed: l.speed, extra: l.extra || '' }))
+                     .filter(l => l.el);
+
+  window.addEventListener('scroll', () => {
+    const sy = window.scrollY;
+    els.forEach(({ el, speed, extra }) => {
+      const y = sy * speed;
+      el.style.transform = `translateY(${y}px) ${extra}`;
+    });
+  }, { passive: true });
+}
+
+// ═══════════════════════════════════════════════
+//  RIPPLE SUR BOUTONS
+// ═══════════════════════════════════════════════
+function initRipple() {
+  document.querySelectorAll('.btn-primary, .btn-form-submit, .formation-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      const r    = btn.getBoundingClientRect();
+      const size = Math.max(r.width, r.height) * 1.4;
+      const wave = document.createElement('span');
+      wave.className = 'ripple-wave';
+      wave.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX-r.left-size/2}px;top:${e.clientY-r.top-size/2}px`;
+      btn.appendChild(wave);
+      setTimeout(() => wave.remove(), 560);
+    });
+  });
+}
+
+// ═══════════════════════════════════════════════
+//  SWIPE SLIDER iOS
+// ═══════════════════════════════════════════════
+function initSwipeSlider() {
+  const slider = document.getElementById('swipeToProfile');
+  if (!slider) return;
+
+  const thumb  = document.getElementById('swipeThumb');
+  const fill   = slider.querySelector('.swipe-fill');
+  const label  = slider.querySelector('.swipe-label');
+  const href   = slider.dataset.href;
+
+  let dragging = false;
+  let startX   = 0;
+  let travel   = 0;
+  let maxTravel = 0;
+
+  function getClientX(e) {
+    return e.touches ? e.touches[0].clientX : e.clientX;
+  }
+
+  function onStart(e) {
+    maxTravel = slider.offsetWidth - thumb.offsetWidth - 8;
+    dragging  = true;
+    startX    = getClientX(e);
+    travel    = 0;
+    thumb.style.transition = 'none';
+    fill.style.transition   = 'none';
+    e.preventDefault();
+  }
+
+  function onMove(e) {
+    if (!dragging) return;
+    travel = Math.max(0, Math.min(getClientX(e) - startX, maxTravel));
+    const ratio = travel / maxTravel;
+    thumb.style.transform = `translateY(-50%) translateX(${travel}px)`;
+    fill.style.transform  = `scaleX(${ratio})`;
+    label.style.opacity   = 1 - ratio * 1.4;
+    e.preventDefault();
+  }
+
+  function onEnd() {
+    if (!dragging) return;
+    dragging = false;
+    const spring = 'transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1)';
+
+    if (travel >= maxTravel * 0.72) {
+      thumb.style.transition = spring;
+      fill.style.transition  = 'transform 0.3s ease';
+      thumb.style.transform  = `translateY(-50%) translateX(${maxTravel}px)`;
+      fill.style.transform   = 'scaleX(1)';
+      label.style.opacity    = '0';
+      setTimeout(() => { window.location.href = href; }, 420);
+    } else {
+      thumb.style.transition = spring;
+      fill.style.transition  = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      label.style.transition = 'opacity 0.3s';
+      thumb.style.transform  = 'translateY(-50%)';
+      fill.style.transform   = 'scaleX(0)';
+      label.style.opacity    = '1';
+      travel = 0;
+    }
+  }
+
+  thumb.addEventListener('mousedown',  onStart);
+  thumb.addEventListener('touchstart', onStart, { passive: false });
+  document.addEventListener('mousemove',  onMove);
+  document.addEventListener('touchmove',  onMove, { passive: false });
+  document.addEventListener('mouseup',   onEnd);
+  document.addEventListener('touchend',  onEnd);
+}
 
 // ═══════════════════════════════════════════════
 //  MOBILE MENU
@@ -275,14 +602,14 @@ function logout() {
   sessionStorage.removeItem('cm_user');
   currentUser=null;
   document.getElementById('bookingContainer').style.display='none';
-  document.getElementById('authContainer').style.display='block';
+  showPanel('authContainer');
   selectedDate=null; selectedTime=null;
 }
 
 function onLogin(user) {
   document.getElementById('dbLoading').style.display='none';
   document.getElementById('authContainer').style.display='none';
-  document.getElementById('bookingContainer').style.display='block';
+  showPanel('bookingContainer');
   document.getElementById('userWelcome').textContent='Bonjour, '+user.name;
   renderCalendar();
   switchBookingTab('new');
