@@ -3038,6 +3038,206 @@ blockquote {
 /* ── VISUAL-BREAK — parallax container ── */
 .visual-break { overflow: hidden; }
 
+/* ══════════════════════════════════════
+   VISUAL BREAK — iOS 26 LIQUID GLASS
+   ══════════════════════════════════════ */
+
+/* Bandeau glass haut du visual-break */
+.vb-glass-top {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  padding: 22px 40px;
+  background: rgba(255,255,255,.13);
+  backdrop-filter: blur(32px) saturate(180%);
+  -webkit-backdrop-filter: blur(32px) saturate(180%);
+  border-bottom: 1px solid rgba(255,255,255,.22);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.4),
+              0 4px 20px rgba(0,0,0,.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+}
+.vb-bottom-text {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1rem, 2.6vw, 1.8rem);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 20px rgba(0,0,0,.4);
+}
+
+/* Bandeau glass haut */
+.vb-glass-top {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 64px;
+  background: rgba(255,255,255,.1);
+  backdrop-filter: blur(28px) saturate(200%) brightness(1.1);
+  -webkit-backdrop-filter: blur(28px) saturate(200%) brightness(1.1);
+  border-bottom: 1px solid rgba(255,255,255,.22);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.45),
+              0 4px 24px rgba(0,0,0,.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+.vb-top-tag {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.9);
+  text-shadow: 0 1px 8px rgba(0,0,0,.3);
+}
+.vb-top-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--neon);
+  box-shadow: 0 0 10px var(--neon-glow);
+  animation: dot-pulse 2.4s ease-in-out infinite;
+}
+
+/* Orbes de flou */
+.vb-blur-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 2;
+}
+.vb-blur-orb--1 {
+  width: 340px; height: 340px;
+  top: -60px; left: 15%;
+  background: rgba(59,130,246,.06);
+  backdrop-filter: blur(48px);
+  -webkit-backdrop-filter: blur(48px);
+  animation: orb-drift 16s ease-in-out infinite;
+}
+.vb-blur-orb--2 {
+  width: 220px; height: 220px;
+  bottom: 40px; right: 18%;
+  background: rgba(255,255,255,.04);
+  backdrop-filter: blur(36px);
+  -webkit-backdrop-filter: blur(36px);
+  animation: orb-drift 20s ease-in-out infinite reverse 4s;
+}
+
+/* Cartes glass flottantes */
+.vb-glass-card {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 16px 22px;
+  background: rgba(255,255,255,.13);
+  backdrop-filter: blur(32px) saturate(220%) brightness(1.15);
+  -webkit-backdrop-filter: blur(32px) saturate(220%) brightness(1.15);
+  border: 1px solid rgba(255,255,255,.28);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.22),
+              inset 0 1.5px 0 rgba(255,255,255,.55),
+              inset 0 -1px 0 rgba(0,0,0,.08);
+  z-index: 4;
+  animation: vb-card-float 5s ease-in-out infinite;
+}
+.vb-glass-card--1 {
+  left: 7%;
+  top: 50%;
+  transform: translateY(-50%);
+  animation-delay: 0s;
+}
+.vb-glass-card--2 {
+  left: 7%;
+  top: calc(50% + 110px);
+  transform: translateY(-50%);
+  animation-delay: 0.8s;
+}
+.vb-glass-card--3 {
+  right: 7%;
+  top: 50%;
+  transform: translateY(-50%);
+  animation-delay: 1.6s;
+}
+@keyframes vb-card-float {
+  0%,100% { transform: translateY(-50%); }
+  50%      { transform: translateY(calc(-50% - 10px)); }
+}
+.vb-card-num {
+  font-family: 'Cinzel', serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+  text-shadow: 0 2px 12px rgba(0,0,0,.3);
+}
+.vb-card-lbl {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.72);
+  white-space: nowrap;
+}
+
+/* Bandeau diagonal */
+.vb-glass-stripe {
+  position: absolute;
+  left: -10%; right: -10%;
+  top: 50%;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255,255,255,.18) 20%,
+    rgba(255,255,255,.35) 50%,
+    rgba(255,255,255,.18) 80%,
+    transparent 100%);
+  transform: translateY(-50%) rotate(-1.5deg);
+  backdrop-filter: blur(2px);
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Bandeau glass bas */
+.vb-glass-bottom {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 22px 40px 28px;
+  background: rgba(0,0,0,.28);
+  backdrop-filter: blur(36px) saturate(180%);
+  -webkit-backdrop-filter: blur(36px) saturate(180%);
+  border-top: 1px solid rgba(255,255,255,.18);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.22);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  z-index: 4;
+}
+.vb-bottom-text {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.1rem, 2.8vw, 2rem);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 24px rgba(0,0,0,.5);
+}
+.vb-bottom-sub {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.55);
+}
+
 /* ── REDUCED MOTION ── */
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; animation: none; }
