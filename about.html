@@ -13,7 +13,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 
   <link rel="stylesheet" href="style.css"/>
 </head>
@@ -53,27 +53,83 @@
     </div>
   </nav>
 
-  <!-- HERO DE LA PAGE ABOUT -->
-  <section class="about-hero">
-    <div class="about-hero-bg">
-      <img src="imagehyrox/IMG_1162.jpeg" alt="Charles Machado" onerror="this.style.display='none'"/>
-      <div class="about-hero-vignette"></div>
+  <!-- HERO PAGE ABOUT — iOS 26 Glass -->
+  <section class="ah2-hero">
+
+    <!-- Background layers -->
+    <div class="ah2-bg" aria-hidden="true">
+      <div class="ah2-bg-glow ah2-bg-glow--top"></div>
+      <div class="ah2-bg-glow ah2-bg-glow--bottom"></div>
+      <div class="ah2-bg-grid"></div>
     </div>
-    <div class="about-hero-content">
-      <span class="section-tag">Qui suis-je ?</span>
-      <h1 class="about-hero-name">
-        Charles Machado
-        <em>Da Silva</em>
-      </h1>
-      <p class="about-hero-tagline">
-        Athlète de haut niveau · Champion régional · Coach certifié BPJEPS<br/>
-        Je forge des corps d'exception depuis plus de 5 ans.
-      </p>
+
+    <div class="ah2-inner">
+
+      <!-- LEFT — texte -->
+      <div class="ah2-left">
+
+        <div class="ah2-eyebrow">
+          <span class="ah2-eyebrow-dot"></span>
+          Coach Sportif Certifié BPJEPS
+        </div>
+
+        <h1 class="ah2-name">
+          <span class="ah2-name-first">Charles</span>
+          <span class="ah2-name-last">Machado</span>
+          <em class="ah2-name-em">Da Silva</em>
+        </h1>
+
+        <p class="ah2-tagline">
+          Athlète de haut niveau · Champion régional · Je forge des corps<br class="ah2-br"/> d'exception depuis plus de 5 ans.
+        </p>
+
+        <!-- Stats glass pills -->
+        <div class="ah2-stats">
+          <div class="ah2-stat">
+            <span class="ah2-stat-num">100+</span>
+            <span class="ah2-stat-lbl">Athlètes</span>
+          </div>
+          <div class="ah2-stat-sep"></div>
+          <div class="ah2-stat">
+            <span class="ah2-stat-num">5+</span>
+            <span class="ah2-stat-lbl">Ans d'exp.</span>
+          </div>
+          <div class="ah2-stat-sep"></div>
+          <div class="ah2-stat">
+            <span class="ah2-stat-num">BPJEPS</span>
+            <span class="ah2-stat-lbl">Certifié État</span>
+          </div>
+        </div>
+
+        <div class="ah2-actions">
+          <a href="index.html#reservation" class="btn-primary">
+            Réserver un appel
+            <svg viewBox="0 0 20 20" fill="none" width="15" height="15"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#story-homme" class="ah2-link-ghost">Découvrir mon parcours →</a>
+        </div>
+
+      </div>
+
+      <!-- RIGHT — photo glass frame -->
+      <div class="ah2-right" aria-hidden="true">
+        <div class="ah2-photo-frame">
+          <div class="ah2-photo-glow"></div>
+          <div class="ah2-photo-card">
+            <div class="ah2-photo-card-shine"></div>
+            <img src="imagehyrox/pose1.png" alt="Charles Machado" class="ah2-photo"/>
+          </div>
+        </div>
+      </div>
+
     </div>
-    <div class="about-hero-scroll">
-      <span class="scroll-label">Découvrir</span>
-      <div class="scroll-line"></div>
+
+    <!-- Scroll -->
+    <div class="ah2-scroll" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="ah2-scroll-line"></div>
     </div>
+
   </section>
 
   <!-- BANDEAU DÉFILANT NÉON -->

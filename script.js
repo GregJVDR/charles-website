@@ -147,24 +147,21 @@ function initFormationCards() {
   const cards = document.querySelectorAll('.formations-grid .formation-card');
   if (!cards.length) return;
 
-  cards.forEach(card => {
-    card.style.opacity   = '0';
-    card.style.transform = 'translateY(90px) scale(0.93)';
-    card.style.transition = 'none';
-  });
+  cards.forEach(card => { card.style.opacity = '0'; });
 
   const obs = new IntersectionObserver(entries => {
-    if (entries[0].isIntersecting) {
-      obs.disconnect();
-      cards.forEach((card, i) => {
-        setTimeout(() => {
-          card.style.transition = 'opacity 0.8s cubic-bezier(0.34,1.56,0.64,1), transform 0.8s cubic-bezier(0.34,1.56,0.64,1)';
-          card.style.opacity    = '1';
-          card.style.transform  = 'translateY(0) scale(1)';
-        }, i * 160);
-      });
-    }
-  }, { threshold: 0.12 });
+    if (!entries[0].isIntersecting) return;
+    obs.disconnect();
+    cards.forEach((card, i) => {
+      card.style.animationDelay = `${i * 130}ms`;
+      card.classList.add('card-entering');
+      card.addEventListener('animationend', () => {
+        card.style.opacity = '';
+        card.style.animationDelay = '';
+        card.classList.remove('card-entering');
+      }, { once: true });
+    });
+  }, { threshold: 0.1 });
 
   obs.observe(document.querySelector('.formations-grid'));
 }
@@ -551,8 +548,12 @@ function formatExpiry(el) { let v=el.value.replace(/\D/g,'').substring(0,4); if(
 function switchTab(tab) {
   document.querySelectorAll('.auth-tab').forEach((t,i) =>
     t.classList.toggle('active',(tab==='login'&&i===0)||(tab==='register'&&i===1)));
-  document.getElementById('loginForm').style.display    = tab==='login'?'flex':'none';
-  document.getElementById('registerForm').style.display = tab==='register'?'flex':'none';
+  const lf = document.getElementById('loginForm');
+  const rf = document.getElementById('registerForm');
+  lf.style.visibility    = tab === 'login'    ? '' : 'hidden';
+  lf.style.pointerEvents = tab === 'login'    ? '' : 'none';
+  rf.style.visibility    = tab === 'register' ? '' : 'hidden';
+  rf.style.pointerEvents = tab === 'register' ? '' : 'none';
 }
 
 async function register() {

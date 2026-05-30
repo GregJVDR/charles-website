@@ -13,7 +13,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -100,6 +100,10 @@
           <div class="hero-stat-card">
             <div class="hero-stat-num"><span class="count-up" data-target="5">0</span>+</div>
             <div class="hero-stat-label">Ans d'expérience</div>
+          </div>
+          <div class="hero-stat-card">
+            <div class="hero-stat-num">BPJEPS</div>
+            <div class="hero-stat-label">Certifié d'État</div>
           </div>
         </div>
       </div>
@@ -263,9 +267,7 @@
   <!-- QUOTE -->
   <div class="quote-section">
     <div class="quote-inner">
-      <div class="quote-ornament">——— ✦ ———</div>
       <blockquote>« La discipline est le pont entre les objectifs<br/>et l'accomplissement. »</blockquote>
-      <div class="quote-ornament">——— ✦ ———</div>
     </div>
   </div>
 
@@ -390,6 +392,7 @@
             <button class="auth-tab" onclick="switchTab('register')">Créer un compte</button>
           </div>
 
+          <div class="auth-forms-wrap">
           <div id="loginForm" class="auth-form">
             <div class="form-group">
               <label for="loginEmail">Email</label>
@@ -406,7 +409,7 @@
             </button>
           </div>
 
-          <div id="registerForm" class="auth-form" style="display:none">
+          <div id="registerForm" class="auth-form" style="visibility:hidden;pointer-events:none">
             <div class="form-row">
               <div class="form-group">
                 <label for="regName">Prénom & Nom *</label>
@@ -431,6 +434,7 @@
               <svg viewBox="0 0 20 20" fill="none" width="15" height="15"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
           </div>
+          </div><!-- /.auth-forms-wrap -->
         </div>
 
         <div id="bookingContainer" style="display:none">
