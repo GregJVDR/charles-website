@@ -2979,31 +2979,6 @@ blockquote {
   75%      { transform: translate(55px, -25px)  scale(1.04); }
 }
 
-/* ── HALTÈRE FLOTTANT ── */
-.halter-wrap {
-  position: absolute;
-  width: 210px;
-  height: auto;
-  bottom: 22%;
-  right: -160px;
-  z-index: 3;
-  pointer-events: none;
-  will-change: transform;
-}
-.halter-float {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  pointer-events: none;
-  filter: drop-shadow(0 28px 52px rgba(0,0,0,.65))
-          drop-shadow(0 0 40px rgba(59,130,246,.18));
-  animation: halter-levitate 5.5s ease-in-out infinite;
-  will-change: transform;
-}
-@keyframes halter-levitate {
-  0%,100% { transform: translateY(0)   rotate(-14deg); }
-  50%      { transform: translateY(-24px) rotate(-9deg); }
-}
 
 /* ── LIQUID GLASS — HERO STAT CARDS ── */
 .hero-stat-card {
@@ -3058,20 +3033,6 @@ blockquote {
   will-change: transform;
 }
 
-/* ── HALTÈRE FORMATIONS ── */
-.formations-halter {
-  position: absolute;
-  left: -30px;
-  bottom: 80px;
-  width: 360px;
-  height: auto;
-  object-fit: contain;
-  pointer-events: none;
-  opacity: 0.85;
-  transform: rotate(-18deg);
-  animation: halter-levitate 7s ease-in-out infinite 1s;
-  z-index: 1;
-}
 
 /* ── LIQUID GLASS — FORMATION CARDS ── */
 .formation-card {
