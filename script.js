@@ -272,17 +272,16 @@ function initMagnetic() {
 // ═══════════════════════════════════════════════
 function initParallax() {
   const layers = [
-    { sel: '.hero-photo',  speed:  0.06 },
-    { sel: '.halter-wrap', speed: -0.09 },
+    { sel: '.hero-photo',    speed: 0.06 },
+    { sel: '.formations-bg', speed: 0.10 },
   ];
-  const els = layers.map(l => ({ el: document.querySelector(l.sel), speed: l.speed, extra: l.extra || '' }))
+  const els = layers.map(l => ({ el: document.querySelector(l.sel), speed: l.speed }))
                      .filter(l => l.el);
 
   window.addEventListener('scroll', () => {
     const sy = window.scrollY;
-    els.forEach(({ el, speed, extra }) => {
-      const y = sy * speed;
-      el.style.transform = `translateY(${y}px) ${extra}`;
+    els.forEach(({ el, speed }) => {
+      el.style.transform = `translateY(${sy * speed}px)`;
     });
   }, { passive: true });
 }
@@ -517,19 +516,9 @@ function demoGetBookings() { try{return JSON.parse(localStorage.getItem('cm_book
 function demoSaveBookings(b){ localStorage.setItem('cm_bookings',JSON.stringify(b)) }
 
 // ═══════════════════════════════════════════════
-//  PAYMENT
+//  PAYMENT (Phase I — 59€)
 // ═══════════════════════════════════════════════
-const PROGRAMS = {
-  olympus:    {name:'Olympus Elite — 12 semaines', price:'297 €'},
-  fondations: {name:'Fondations — 8 semaines',    price:'97 €'},
-  dieta:      {name:'Dieta Apollinis',             price:'127 €'},
-  titan:      {name:'Titan Protocol — 10 semaines', price:'197 €'}
-};
 function openPayment(prog) {
-  const p = PROGRAMS[prog];
-  document.getElementById('modalTitle').textContent = p.name;
-  document.getElementById('modalPrice').textContent = p.price;
-  document.getElementById('payBtn').textContent     = p.price;
   document.getElementById('paymentModal').classList.add('active');
 }
 function processPayment(e) {
@@ -539,8 +528,85 @@ function processPayment(e) {
 }
 function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 function closeIfBg(e,id) { if(e.target===document.getElementById(id)) closeModal(id); }
-function formatCard(el) { let v=el.value.replace(/\D/g,'').substring(0,16); el.value=v.replace(/(.{4})/g,'$1 ').trim(); }
-function formatExpiry(el) { let v=el.value.replace(/\D/g,'').substring(0,4); if(v.length>=2) v=v.substring(0,2)+'/'+v.substring(2); el.value=v; }
+
+// ═══════════════════════════════════════════════
+//  CANDIDATURE (Accompagnement Personnalisé 197€)
+// ═══════════════════════════════════════════════
+function openCandidature() {
+  document.getElementById('candidatureModal').classList.add('active');
+}
+
+async function submitCandidature(e) {
+  e.preventDefault();
+  const err = document.getElementById('candError');
+  const suc = document.getElementById('candSuccess');
+  const btn = document.getElementById('candBtn');
+  err.style.display = 'none';
+  suc.style.display  = 'none';
+
+  const prenom   = document.getElementById('candPrenom').value.trim();
+  const nom      = document.getElementById('candNom').value.trim();
+  const email    = document.getElementById('candEmail').value.trim();
+  const tel      = document.getElementById('candTel').value.trim();
+  const age      = document.getElementById('candAge').value;
+  const taille   = document.getElementById('candTaille').value;
+  const poids    = document.getElementById('candPoids').value;
+  const seances  = document.getElementById('candSeances').value;
+  const objectif = document.getElementById('candObjectif').value;
+  const materiel = document.getElementById('candMateriel').value;
+  const bless    = document.getElementById('candBlessures').value.trim();
+  const pourquoi = document.getElementById('candPourquoi').value.trim();
+  const resultat = document.getElementById('candResultat').value.trim();
+
+  if (!prenom || !nom || !email || !tel || !objectif || !pourquoi || !resultat) {
+    err.textContent = 'Veuillez remplir tous les champs obligatoires (*).';
+    err.style.display = 'block';
+    return;
+  }
+
+  btn.textContent = 'Envoi en cours…';
+  btn.disabled = true;
+
+  const body = [
+    `Nom : ${prenom} ${nom}`,
+    `Email : ${email}`,
+    `Téléphone : ${tel}`,
+    `Âge : ${age || 'Non renseigné'}`,
+    `Taille : ${taille ? taille + ' cm' : 'Non renseigné'}`,
+    `Poids : ${poids ? poids + ' kg' : 'Non renseigné'}`,
+    `Séances / semaine : ${seances || 'Non renseigné'}`,
+    `Objectif : ${objectif}`,
+    `Matériel : ${materiel || 'Non renseigné'}`,
+    `Douleurs / blessures : ${bless || 'Aucune'}`,
+    `Pourquoi accompagné : ${pourquoi}`,
+    `Résultat souhaité : ${resultat}`,
+  ].join('\n');
+
+  if (typeof emailjs !== 'undefined' && !EMAILJS_SERVICE.includes('YOUR')) {
+    try {
+      emailjs.init(EMAILJS_KEY);
+      await emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, {
+        coach_email: COACH_EMAIL,
+        client_name: `${prenom} ${nom}`,
+        client_email: email,
+        client_phone: tel,
+        date: 'CANDIDATURE ACCOMPAGNEMENT 197€',
+        time: '',
+        goal: objectif,
+        msg: body
+      });
+    } catch(ex) {
+      console.warn('EmailJS:', ex);
+    }
+  } else {
+    console.log('📩 [Demo] Candidature:', body);
+  }
+
+  btn.textContent = 'Envoyer ma candidature';
+  btn.disabled = false;
+  document.getElementById('candidatureForm').reset();
+  suc.style.display = 'flex';
+}
 
 // ═══════════════════════════════════════════════
 //  AUTH
