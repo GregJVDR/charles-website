@@ -2158,8 +2158,8 @@ blockquote {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
   background-size: 80px 80px;
   mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
   -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
@@ -3659,13 +3659,13 @@ blockquote {
   will-change: transform, opacity;
 }
 .ah2-aurora--1 {
-  width: 900px; height: 900px;
-  top: -320px; right: -200px;
+  width: 1200px; height: 1200px;
+  top: -440px; right: -260px;
   background: radial-gradient(circle at 40% 40%,
-    rgba(59,130,246,.28) 0%,
-    rgba(99,102,241,.14) 40%,
+    rgba(59,130,246,.38) 0%,
+    rgba(99,102,241,.20) 40%,
     transparent 70%);
-  filter: blur(70px);
+  filter: blur(65px);
   animation: aurora-drift-1 18s ease-in-out infinite alternate;
 }
 .ah2-aurora--2 {
@@ -3741,7 +3741,7 @@ blockquote {
   line-height: 1;
   letter-spacing: 0.04em;
   color: transparent;
-  -webkit-text-stroke: 1px rgba(255,255,255,.03);
+  -webkit-text-stroke: 1.5px rgba(255,255,255,.06);
   white-space: nowrap;
   pointer-events: none;
   user-select: none;
@@ -4373,6 +4373,8 @@ blockquote {
   .ah2-float-badge--top { top: 24px; right: -10px; }
   .ah2-float-badge--bottom { bottom: 70px; left: -10px; }
   .ah2-ghost-name { display: none; }
+  .ah2-cm-back { display: none; }
+  .ah2-edge-text { display: none; }
   .ah2-stats-row { gap: 10px; }
   .ah2-stat-widget { padding: 12px 14px; }
 }
@@ -4383,11 +4385,154 @@ blockquote {
   .ah2-stats-row { flex-wrap: wrap; }
   .ah2-float-badge { display: none; }
   .ah2-photo-ring { display: none; }
+  .ah2-cm-back { display: none; }
+  .ah2-edge-text { display: none; }
+  .ah2-dot-field { display: none; }
+  .ah2-left-stripe { display: none; }
   .ah2-right { height: 340px; }
   .ah2-disciplines { gap: 6px; }
   .ah2-disc { font-size: 0.5rem; padding: 5px 11px; }
   .ah2-actions { flex-direction: column; align-items: flex-start; }
   .ah2-cta-btn { width: 100%; justify-content: center; }
+}
+
+/* ══════════════════════════════════════════════
+   HERO ABOUT — Éléments de fond Nike/Adidas
+   ══════════════════════════════════════════════ */
+
+/* 4th aurora — large bottom-right glow */
+.ah2-aurora--4 {
+  width: 900px; height: 700px;
+  bottom: -180px; right: -60px;
+  background: radial-gradient(ellipse at 55% 75%,
+    rgba(59,130,246,.22) 0%,
+    rgba(99,102,241,.1) 45%,
+    transparent 70%);
+  filter: blur(100px);
+  animation: aurora-drift-2 22s ease-in-out infinite alternate-reverse;
+}
+
+/* Dot field — grille de points style Adidas/technique */
+.ah2-dot-field {
+  position: absolute;
+  top: 0; left: 0;
+  width: 55%; height: 80%;
+  background-image: radial-gradient(circle, rgba(255,255,255,.13) 1px, transparent 1px);
+  background-size: 30px 30px;
+  mask-image: radial-gradient(ellipse 88% 88% at 6% 6%, black 0%, transparent 72%);
+  -webkit-mask-image: radial-gradient(ellipse 88% 88% at 6% 6%, black 0%, transparent 72%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Giant CM monogram — identité sportive en fond */
+.ah2-cm-back {
+  position: absolute;
+  top: 50%;
+  right: -1%;
+  transform: translateY(-52%);
+  font-family: 'Cinzel', serif;
+  font-weight: 900;
+  font-size: clamp(14rem, 24vw, 30rem);
+  line-height: 0.85;
+  letter-spacing: -0.06em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(59,130,246,.1);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  animation: ghost-breathe 14s ease-in-out infinite;
+}
+
+/* Diagonal streaks — lignes de vitesse athlétiques */
+.ah2-diag-streaks {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.ah2-diag-streaks::before {
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: -30%;
+  width: 160%;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(59,130,246,.18) 28%,
+    rgba(99,102,241,.12) 58%,
+    transparent 100%);
+  transform: rotate(-7deg);
+  animation: ah2-streak-pulse 9s ease-in-out infinite;
+}
+.ah2-diag-streaks::after {
+  content: '';
+  position: absolute;
+  top: 46%;
+  left: -20%;
+  width: 140%;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255,255,255,.07) 38%,
+    rgba(59,130,246,.09) 68%,
+    transparent 100%);
+  transform: rotate(-5deg);
+  animation: ah2-streak-pulse 13s ease-in-out infinite 5.5s;
+}
+@keyframes ah2-streak-pulse {
+  0%,100% { opacity: 0.45; }
+  50%     { opacity: 1; }
+}
+
+/* Vertical edge text — détail graphique sport brand */
+.ah2-edge-text {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%) rotate(90deg);
+  font-family: 'Cinzel', serif;
+  font-size: 0.43rem;
+  font-weight: 600;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.065);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+}
+
+/* Left accent stripe — signature visuelle Adidas */
+.ah2-left-stripe {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(59,130,246,.4) 12%,
+    rgba(59,130,246,.9) 35%,
+    rgba(99,102,241,.8) 55%,
+    rgba(59,130,246,.4) 78%,
+    transparent 100%
+  );
+  box-shadow: 0 0 20px rgba(59,130,246,.5), 0 0 50px rgba(59,130,246,.18);
+}
+
+/* Bottom haze — ancrage profondeur photo */
+.ah2-bottom-haze {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 38%;
+  background: linear-gradient(to top,
+    rgba(7,7,9,.65) 0%,
+    rgba(7,7,9,.28) 50%,
+    transparent 100%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* ══════════════════════════════════════════════
