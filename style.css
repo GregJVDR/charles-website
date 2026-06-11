@@ -2772,7 +2772,7 @@ blockquote {
 @media (max-width: 768px) {
 
   /* ── Variables mobiles ── */
-  :root { --nav-h: 60px; }
+  :root { --nav-h: 56px; }
 
   /* ── Safe-area (encoche iPhone) + no horizontal scroll ── */
   html, body { overflow-x: hidden; }
@@ -3099,6 +3099,51 @@ blockquote {
   .timeline-year { font-size: 0.9rem; }
   .cta-actions { flex-direction: column; align-items: center; gap: 12px; }
   .cta-actions .btn-primary { width: 100%; max-width: 360px; justify-content: center; }
+
+  /* ─────────────────── CORRECTIFS TOUCH MANQUANTS ─────────────────── */
+
+  /* iOS zoom prevention — font-size 16px obligatoire sur tous les champs */
+  .form-group input,
+  .form-group select,
+  .form-group textarea { font-size: 16px !important; }
+
+  /* Créneaux horaires — cible tactile ≥ 44px */
+  .time-slot {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Formation foot — empilement vertical + bouton pleine largeur */
+  .formation-foot {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .formation-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 16px 20px;
+  }
+
+  /* Modal ✕ — cible tactile 44×44 */
+  .modal-close { width: 44px; height: 44px; }
+
+  /* Visual break — hauteur réduite sur mobile */
+  .visual-break { height: 260px; }
+
+  /* Swipe slider — pleine largeur sur mobile */
+  .swipe-slider { width: 100%; max-width: none; }
+
+  /* Boutons de navigation calendrier — touch-friendly */
+  .cal-nav-btn { width: 40px; height: 40px; }
+
+  /* Liens footer — zone tactile minimum */
+  .footer-col a { padding: 8px 0; margin-bottom: 2px; }
+
+  /* Bouton déconnexion — touch-friendly */
+  .btn-logout { padding: 10px 16px; min-height: 44px; }
 }
 
 
@@ -3130,6 +3175,7 @@ blockquote {
 
   .booking-wrapper { padding: 20px 14px; }
   .time-slots { grid-template-columns: repeat(2, 1fr); }
+  .time-slot { min-height: 48px; }
   .cal-weekdays span { padding: 6px 1px; }
 
   .modal-box { padding: 10px 16px calc(38px + env(safe-area-inset-bottom)); border-radius: 20px 20px 0 0; }
