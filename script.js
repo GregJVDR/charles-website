@@ -271,6 +271,7 @@ function initMagnetic() {
 //  PARALLAX SCROLL
 // ═══════════════════════════════════════════════
 function initParallax() {
+  if (window.matchMedia('(pointer:coarse)').matches) return;
   const layers = [
     { sel: '.hero-photo',    speed: 0.06 },
     { sel: '.formations-bg', speed: 0.10 },
