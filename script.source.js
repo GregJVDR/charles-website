@@ -100,6 +100,10 @@ window.addEventListener('DOMContentLoaded', () => {
 //  COMPARATEUR AVANT / APRÈS (swipe)
 // ═══════════════════════════════════════════════
 function initBeforeAfter() {
+  // Sur mobile, les cartes vivent dans un carrousel swipable : on désactive
+  // le drag « pointer » (qui capturait le geste) et on laisse l'animation auto.
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
   document.querySelectorAll('[data-ba]').forEach(slider => {
     const before  = slider.querySelector('.ba-before');
     const divider = slider.querySelector('.ba-divider');
@@ -117,25 +121,27 @@ function initBeforeAfter() {
       setPercent(((clientX - rect.left) / rect.width) * 100);
     };
 
-    slider.addEventListener('pointerdown', (e) => {
-      dragging = true;
-      slider.classList.add('ba-active');
-      slider.classList.remove('ba-sweep'); // l'utilisateur prend la main
-      slider.setPointerCapture(e.pointerId);
-      setFromX(e.clientX);
-    });
-    slider.addEventListener('pointermove', (e) => { if (dragging) setFromX(e.clientX); });
-    const stop = () => { dragging = false; slider.classList.remove('ba-active'); };
-    slider.addEventListener('pointerup', stop);
-    slider.addEventListener('pointercancel', stop);
+    if (!isMobile) {
+      slider.addEventListener('pointerdown', (e) => {
+        dragging = true;
+        slider.classList.add('ba-active');
+        slider.classList.remove('ba-sweep'); // l'utilisateur prend la main
+        slider.setPointerCapture(e.pointerId);
+        setFromX(e.clientX);
+      });
+      slider.addEventListener('pointermove', (e) => { if (dragging) setFromX(e.clientX); });
+      const stop = () => { dragging = false; slider.classList.remove('ba-active'); };
+      slider.addEventListener('pointerup', stop);
+      slider.addEventListener('pointercancel', stop);
+    }
 
     // position initiale au milieu
     setPercent(50);
 
-    // Démo automatique au scroll (une seule fois)
+    // Démo automatique au scroll (en boucle sur mobile, une fois sur desktop)
     const io = new IntersectionObserver((entries) => {
       if (!entries[0].isIntersecting) return;
-      io.disconnect();
+      if (!isMobile) io.disconnect();
       if (dragging) return;
       slider.classList.add('ba-sweep');
       const seq = [82, 18, 50];
@@ -145,6 +151,7 @@ function initBeforeAfter() {
         setPercent(seq[i]);
         i++;
         if (i < seq.length) setTimeout(run, 850);
+        else if (isMobile) setTimeout(() => { i = 0; run(); }, 2600);
         else setTimeout(() => slider.classList.remove('ba-sweep'), 900);
       };
       setTimeout(run, 350);
@@ -453,7 +460,11 @@ function closeMobileMenu() {
   const menu = document.getElementById('mobileMenu');
   const btn  = document.getElementById('hamburger');
   if (menu) menu.classList.remove('open');
-  if (btn)  btn.classList.remove('open');
+  if (btn) {
+    btn.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+  }
+  document.body.classList.remove('menu-open');
 }
 
 // Aller à l'espace connexion (scroll + onglet "Connexion")
@@ -473,9 +484,13 @@ function initNav() {
   });
 
   if (btn && menu) {
+    btn.setAttribute('aria-expanded', 'false');
     btn.addEventListener('click', () => {
-      btn.classList.toggle('open');
-      menu.classList.toggle('open');
+      const willOpen = !menu.classList.contains('open');
+      btn.classList.toggle('open', willOpen);
+      menu.classList.toggle('open', willOpen);
+      btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+      document.body.classList.toggle('menu-open', willOpen);
     });
   }
 
@@ -484,6 +499,11 @@ function initNav() {
     if (menu && menu.classList.contains('open')) {
       if (!nav.contains(e.target)) closeMobileMenu();
     }
+  });
+
+  // Close menu when leaving mobile breakpoint (e.g. rotation / resize)
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) closeMobileMenu();
   });
 }
 

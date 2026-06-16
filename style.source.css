@@ -5215,3 +5215,186 @@ blockquote {
 @media (max-width: 480px) {
   .modal-box--candidature { padding: 18px 16px calc(38px + env(safe-area-inset-bottom)); }
 }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE — REFONTE OPTIMISÉE (ajout final · priorité de source)
+   • Hamburger + menu repensés
+   • Transformations & Programmes en rangée swipable (côte à côte)
+   • Photo du bras recadrée (plus coupée)
+   • Typographie plus aérée / moins dense
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* ─────────────── HAMBURGER — cible 44px, X net centré ─────────────── */
+  .nav-hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    gap: 0;
+    margin-left: auto;
+    position: relative;
+    border-radius: 12px;
+    background: rgba(10,10,10,.045);
+    border: 1px solid var(--line-soft);
+    transition: background .25s var(--ease), border-color .25s var(--ease);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .nav-hamburger:active { background: rgba(10,10,10,.09); }
+  .nav-hamburger span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 20px;
+    height: 2px;
+    margin-left: -10px;
+    margin-top: -1px;
+    border-radius: 2px;
+    background: var(--ink);
+    transition: transform .35s var(--ease), opacity .2s var(--ease), background .25s var(--ease);
+  }
+  .nav-hamburger span:nth-child(1) { transform: translateY(-6px); }
+  .nav-hamburger span:nth-child(2) { transform: translateY(0); }
+  .nav-hamburger span:nth-child(3) { transform: translateY(6px); }
+  .nav-hamburger.open { background: var(--ink); border-color: var(--ink); }
+  .nav-hamburger.open span { background: #fff; }
+  .nav-hamburger.open span:nth-child(1) { transform: rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .nav-hamburger.open span:nth-child(3) { transform: rotate(-45deg); }
+
+  /* ─────────────── MENU MOBILE — sobre, lisible, scroll-lock ─────────────── */
+  body.menu-open { overflow: hidden; }
+  .mobile-menu {
+    top: var(--nav-h);
+    gap: 0;
+    padding: 14px 22px calc(28px + env(safe-area-inset-bottom));
+    background: rgba(255,255,255,.99);
+    backdrop-filter: blur(26px) saturate(150%);
+    -webkit-backdrop-filter: blur(26px) saturate(150%);
+    justify-content: flex-start;
+  }
+  .mobile-menu a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 18px 4px;
+    text-align: left;
+    border-radius: 0;
+    border-bottom: 1px solid var(--line-soft);
+    color: var(--ink);
+    font-size: 0.84rem;
+    letter-spacing: 0.1em;
+  }
+  .mobile-menu a::after {
+    content: '›';
+    font-family: system-ui, sans-serif;
+    font-size: 1.25rem;
+    line-height: 1;
+    color: var(--text-faint);
+    transition: transform .25s var(--ease);
+  }
+  .mobile-menu a:active { background: var(--fill-soft); }
+  .mobile-menu .mobile-cta {
+    justify-content: center;
+    margin-top: 22px;
+    padding: 18px 24px;
+    border-radius: 14px;
+    border-bottom: none;
+    background: var(--ink);
+    color: #fff;
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    box-shadow: 0 10px 26px rgba(0,0,0,.22);
+  }
+  .mobile-menu .mobile-cta::after { content: none; }
+
+  /* ─────────────── LISIBILITÉ — moins de texte, plus d'air ─────────────── */
+  .section-desc {
+    font-size: 0.95rem;
+    line-height: 1.62;
+    max-width: 32ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .about-para { font-size: 1.02rem; line-height: 1.85; }
+  /* On masque le long paragraphe d'intro (récit d'enfance) sur mobile :
+     on garde la version « positionnement / crédibilité » plus percutante. */
+  .about-copy-col .about-para:nth-of-type(1) { display: none; }
+  .hero-subtitle { max-width: 300px; }
+
+  /* ─────────────── PHOTO DU BRAS — recadrage propre, non coupée ─────────────── */
+  .visual-break { height: 300px; }
+  .visual-break-img {
+    transform: none;
+    object-fit: cover;
+    object-position: center center;
+  }
+  .visual-break:hover .visual-break-img { transform: none; }
+  .visual-break-overlay { padding-bottom: 30px; }
+
+  /* ─────────────── TRANSFORMATIONS — rangée swipable (côte à côte) ─────────────── */
+  .methode-grid {
+    display: flex;
+    grid-template-columns: none;
+    flex-wrap: nowrap;
+    gap: 14px;
+    max-width: none;
+    margin: 0 -20px;
+    padding: 4px 20px 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 20px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .methode-grid::-webkit-scrollbar { display: none; }
+  .methode-grid .ba-card {
+    flex: 0 0 78%;
+    margin: 0;
+    scroll-snap-align: start;
+  }
+  /* Le comparateur s'anime tout seul → le carrousel reste librement swipable */
+  .methode-grid .ba-slider {
+    touch-action: pan-x;
+    cursor: default;
+  }
+
+  /* ─────────────── PROGRAMMES — 2 cartes côte à côte & swipables ─────────────── */
+  .formations-grid,
+  .formations-grid--2col {
+    display: flex;
+    grid-template-columns: none;
+    flex-wrap: nowrap;
+    gap: 14px;
+    max-width: none;
+    margin: 0 -20px;
+    padding: 6px 20px 18px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 20px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .formations-grid::-webkit-scrollbar,
+  .formations-grid--2col::-webkit-scrollbar { display: none; }
+  .formations-grid .formation-card {
+    flex: 0 0 86%;
+    margin: 0;
+    scroll-snap-align: start;
+  }
+  /* On conserve l'ordre logique 01 → 02 dans le carrousel */
+  .formation-card--featured { order: 0; }
+}
+
+/* ── TRÈS PETITS MOBILES ≤ 480 px ── */
+@media (max-width: 480px) {
+  .methode-grid { margin: 0 -16px; padding: 4px 16px 16px; }
+  .methode-grid .ba-card { flex-basis: 82%; }
+  .formations-grid,
+  .formations-grid--2col { margin: 0 -16px; padding: 6px 16px 18px; }
+  .formations-grid .formation-card { flex-basis: 90%; }
+}
