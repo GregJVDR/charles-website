@@ -2,13 +2,20 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta name="theme-color" content="#0A0A0A"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <link rel="icon" type="image/png" href="imagehyrox/icone.png"/>
+  <link rel="apple-touch-icon" href="imagehyrox/icone.png"/>
   <title>Charles Machado — Qui suis-je ?</title>
   <meta name="description" content="Découvrez l'histoire de Charles Machado Da Silva : athlète de haut niveau, champion régional, coach certifié BPJEPS et formateur de corps d'exception."/>
 
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+  <link rel="preload" as="image" href="imagehyrox/pose1.webp" fetchpriority="high"/>
 
   <link rel="stylesheet" href="style.css"/>
 </head>
@@ -48,27 +55,154 @@
     </div>
   </nav>
 
-  <!-- HERO DE LA PAGE ABOUT -->
-  <section class="about-hero">
-    <div class="about-hero-bg">
-      <img src="imagehyrox/IMG_1162.jpeg" alt="Charles Machado" onerror="this.style.display='none'"/>
-      <div class="about-hero-vignette"></div>
+  <!-- HERO PAGE ABOUT — iOS 26 Ultra Glass -->
+  <section class="ah2-hero">
+
+    <!-- ── Couches de fond animées ── -->
+    <div class="ah2-bg" aria-hidden="true">
+      <div class="ah2-aurora ah2-aurora--1"></div>
+      <div class="ah2-aurora ah2-aurora--2"></div>
+      <div class="ah2-aurora ah2-aurora--3"></div>
+      <div class="ah2-aurora ah2-aurora--4"></div>
+      <div class="ah2-noise"></div>
+      <div class="ah2-bg-grid"></div>
+      <div class="ah2-scanline"></div>
+      <div class="ah2-dot-field"></div>
+      <div class="ah2-cm-back">CM</div>
+      <div class="ah2-diag-streaks"></div>
+      <div class="ah2-edge-text">CHARLES MACHADO DA SILVA · BPJEPS APT · HYROX COMPETITOR</div>
+      <div class="ah2-left-stripe"></div>
+      <div class="ah2-bottom-haze"></div>
     </div>
-    <div class="about-hero-content">
-      <span class="section-tag">Qui suis-je ?</span>
-      <h1 class="about-hero-name">
-        Charles Machado
-        <em>Da Silva</em>
-      </h1>
-      <p class="about-hero-tagline">
-        Athlète de haut niveau · Champion régional · Coach certifié BPJEPS<br/>
-        Je forge des corps d'exception depuis plus de 5 ans.
-      </p>
+
+    <!-- ── Texte fantôme MACHADO ── -->
+    <div class="ah2-ghost-name" aria-hidden="true">MACHADO</div>
+
+    <div class="ah2-inner">
+
+      <!-- ── LEFT — contenu ── -->
+      <div class="ah2-left">
+
+        <!-- Badge live -->
+        <div class="ah2-live-badge">
+          <span class="ah2-live-dot"></span>
+          <span class="ah2-live-ring"></span>
+          Coach Sportif Certifié BPJEPS
+          <span class="ah2-live-sep">·</span>
+          <span class="ah2-live-hyrox">HYROX Competitor</span>
+        </div>
+
+        <!-- Nom -->
+        <h1 class="ah2-name">
+          <span class="ah2-name-first">Charles</span>
+          <span class="ah2-name-last">
+            Machado
+            <span class="ah2-name-underline"></span>
+          </span>
+          <em class="ah2-name-em">Da Silva</em>
+        </h1>
+
+        <!-- Tagline avec icônes disciplines -->
+        <p class="ah2-tagline">
+          Athlète de haut niveau formé depuis l'enfance au judo, à l'athlétisme et à la boxe. Champion régional multiple. Je transforme des corps ordinaires en machines à performer.
+        </p>
+
+        <!-- Disciplines pills -->
+        <div class="ah2-disciplines">
+          <span class="ah2-disc">Athlétisme</span>
+          <span class="ah2-disc">HYROX</span>
+          <span class="ah2-disc">Judo</span>
+          <span class="ah2-disc">Boxe</span>
+          <span class="ah2-disc">BPJEPS APT</span>
+        </div>
+
+        <!-- Stats widgets glass -->
+        <div class="ah2-stats-row">
+          <div class="ah2-stat-widget">
+            <div class="ah2-stat-widget-icon">
+              <svg viewBox="0 0 20 20" fill="none" width="16" height="16"><path d="M9 11l3 3 7-7" stroke="#3B82F6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 12v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2h9" stroke="#3B82F6" stroke-width="1.4" stroke-linecap="round"/></svg>
+            </div>
+            <div class="ah2-stat-widget-body">
+              <span class="ah2-stat-widget-num">100+</span>
+              <span class="ah2-stat-widget-lbl">Athlètes transformés</span>
+            </div>
+          </div>
+          <div class="ah2-stat-widget">
+            <div class="ah2-stat-widget-icon">
+              <svg viewBox="0 0 20 20" fill="none" width="16" height="16"><circle cx="10" cy="10" r="8" stroke="#3B82F6" stroke-width="1.4"/><path d="M10 6v4l2.5 2.5" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </div>
+            <div class="ah2-stat-widget-body">
+              <span class="ah2-stat-widget-num">5+</span>
+              <span class="ah2-stat-widget-lbl">Années d'expérience</span>
+            </div>
+          </div>
+          <div class="ah2-stat-widget">
+            <div class="ah2-stat-widget-icon">
+              <svg viewBox="0 0 20 20" fill="none" width="16" height="16"><path d="M5 3l10 7-10 7V3z" fill="#3B82F6"/></svg>
+            </div>
+            <div class="ah2-stat-widget-body">
+              <span class="ah2-stat-widget-num">BPJEPS</span>
+              <span class="ah2-stat-widget-lbl">Certifié d'État</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="ah2-actions">
+          <a href="index.html#reservation" class="ah2-cta-btn">
+            <span class="ah2-cta-glow"></span>
+            Réserver un appel
+            <svg viewBox="0 0 20 20" fill="none" width="15" height="15"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#story-homme" class="ah2-link-ghost">
+            Découvrir mon parcours
+            <svg viewBox="0 0 16 16" fill="none" width="13" height="13"><path d="M8 3l5 5-5 5M3 8h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- ── RIGHT — photo avec badges flottants ── -->
+      <div class="ah2-right">
+
+        <!-- Badge flottant bas-gauche -->
+        <div class="ah2-float-badge ah2-float-badge--bottom">
+          <div class="ah2-fb-body">
+            <span class="ah2-fb-title">Compétiteur HYROX</span>
+            <span class="ah2-fb-sub">Endurance · Force · Mental</span>
+          </div>
+        </div>
+
+        <!-- Cadre photo principal -->
+        <div class="ah2-photo-frame" id="ah2PhotoFrame">
+          <!-- Lueur ambiance derrière -->
+          <div class="ah2-photo-glow"></div>
+          <!-- Carte glass principale -->
+          <div class="ah2-photo-card">
+            <div class="ah2-photo-card-shine"></div>
+            <div class="ah2-photo-scanbar"></div>
+            <img src="imagehyrox/pose1.webp" alt="Charles Machado" class="ah2-photo" id="ah2Photo"
+              fetchpriority="high" decoding="async" onerror="this.src='imagehyrox/charles-bras-croises.webp'"/>
+            <!-- Overlay gradient bas -->
+            <div class="ah2-photo-gradient"></div>
+          </div>
+          <!-- Carte mini-info dans le cadre -->
+          <div class="ah2-photo-info-card">
+            <div class="ah2-pic-dot"></div>
+            <span>Disponible pour accompagnement</span>
+          </div>
+        </div>
+
+      </div>
+
     </div>
-    <div class="about-hero-scroll">
-      <span class="scroll-label">Découvrir</span>
-      <div class="scroll-line"></div>
+
+    <!-- Scroll indicator -->
+    <div class="ah2-scroll" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="ah2-scroll-line"></div>
     </div>
+
   </section>
 
   <!-- BANDEAU DÉFILANT NÉON -->
@@ -94,7 +228,7 @@
     <div class="section-inner">
       <div class="story-grid">
         <div class="story-img-wrap reveal">
-          <img src="imagehyrox/IMG_0140.JPG" alt="Charles Machado — entraînement" loading="lazy" onerror="this.parentElement.style.background='#e8e2d8'"/>
+          <img src="imagehyrox/IMG_0140.webp" alt="Charles Machado — entraînement" loading="lazy" onerror="this.parentElement.style.background='#e8e2d8'"/>
         </div>
         <div class="story-content">
           <span class="section-tag reveal">L'homme</span>
@@ -123,60 +257,51 @@
   <!-- SECTION : CARRIÈRE ATHLÉTIQUE (fond sombre) -->
   <section class="career-section">
     <div class="career-bg">
-      <img src="imagehyrox/statue.png" alt="" onerror="this.style.display='none'"/>
+      <img src="imagehyrox/statue.webp" alt="" loading="lazy" onerror="this.style.display='none'"/>
       <div class="career-bg-overlay"></div>
     </div>
     <div class="section-inner">
       <div class="career-inner">
         <span class="section-tag reveal">Carrière athlétique</span>
-        <h2 class="section-title inv reveal">Une trajectoire<br/><em>vers l'excellence</em></h2>
+        <h2 class="section-title inv reveal">De la compétition<br/><em>à la transmission</em></h2>
         <p class="section-desc inv reveal" style="--delay:0.1s">
-          Des Championnats de France aux podiums régionaux — un parcours construit dans la discipline et la persévérance.
+          L'athlétisme a occupé une place centrale dans mon parcours sportif pendant de nombreuses années — jusqu'aux Championnats de France.
         </p>
 
         <div class="timeline">
 
           <div class="timeline-item reveal" style="--delay:0.15s">
-            <div class="timeline-year">2023</div>
+            <div class="timeline-year">Aujourd'hui</div>
             <div class="timeline-content">
-              <h4>Champion Départemental — 60m en salle</h4>
-              <p>Titre de champion départemental sur 60 mètres en salle. Une victoire qui confirme le niveau d'élite maintenu après les années de compétition nationale.</p>
-              <span class="timeline-medal">1ère place</span>
+              <h4>Compétiteur HYROX & Coach certifié</h4>
+              <p>Je continue de me challenger à travers de nouveaux objectifs, notamment en préparation physique fonctionnelle et en compétition HYROX — une discipline exigeante qui combine endurance, puissance et résistance mentale.</p>
+              <span class="timeline-medal">BPJEPS APT</span>
             </div>
           </div>
 
           <div class="timeline-item reveal" style="--delay:0.2s">
-            <div class="timeline-year">2020</div>
+            <div class="timeline-year">Podiums</div>
             <div class="timeline-content">
-              <h4>Champion Régional — 200 mètres</h4>
-              <p>Titre de champion régional sur 200 mètres. Une saison marquée par la régularité et l'intensité des entraînements malgré un contexte difficile.</p>
-              <span class="timeline-medal">1ère place</span>
+              <h4>Championnats de France — niveau national</h4>
+              <p>Plusieurs participations aux Championnats de France et différents podiums départementaux et régionaux en athlétisme. Des résultats qui traduisent des milliers d'heures d'entraînement, des périodes de doute, des blessures, des échecs et des victoires.</p>
+              <span class="timeline-medal">National</span>
             </div>
           </div>
 
           <div class="timeline-item reveal" style="--delay:0.25s">
-            <div class="timeline-year">2019</div>
+            <div class="timeline-year">10 ans</div>
             <div class="timeline-content">
-              <h4>Championnats de France — 4×100 mètres</h4>
-              <p>Participation aux Championnats de France sur le relais 4×100 mètres. Une compétition au niveau national qui exige autant de coordination collective que de vitesse individuelle.</p>
-              <span class="timeline-medal">National</span>
+              <h4>Judo — ceinture marron</h4>
+              <p>Débuté à l'âge de 3 ans, pratiqué pendant plus de dix ans jusqu'à l'obtention de la ceinture marron. Le judo a posé les bases de ma discipline mentale et de ma capacité à encaisser l'adversité.</p>
+              <span class="timeline-medal">Ceinture marron</span>
             </div>
           </div>
 
           <div class="timeline-item reveal" style="--delay:0.3s">
-            <div class="timeline-year">2017</div>
+            <div class="timeline-year">Enfance</div>
             <div class="timeline-content">
-              <h4>Championnats de France — Octathlon</h4>
-              <p>Participation aux Championnats de France en octathlon — la discipline reine qui teste toutes les dimensions athlétiques : vitesse, force, endurance, coordination et mental d'acier.</p>
-              <span class="timeline-medal">National</span>
-            </div>
-          </div>
-
-          <div class="timeline-item reveal" style="--delay:0.35s">
-            <div class="timeline-year">2015–</div>
-            <div class="timeline-content">
-              <h4>Début en athlétisme de haut niveau</h4>
-              <p>Les premières années de compétition qui posent les fondations d'une carrière athlétique : discipline quotidienne, perfectionnement technique et construction d'une mentalité de champion.</p>
+              <h4>Natation · Football · Boxe anglaise</h4>
+              <p>Au fil des années, j'ai découvert plusieurs disciplines qui ont chacune contribué à forger mon caractère, ma polyvalence athlétique et ma compréhension des différents types d'effort physique.</p>
             </div>
           </div>
 
@@ -201,7 +326,7 @@
     <div class="section-inner">
       <div class="story-grid reverse">
         <div class="story-img-wrap reveal">
-          <img src="imagehyrox/IMG_0145.JPG" alt="Charles Machado coaching" loading="lazy" onerror="this.parentElement.style.background='#e8e2d8'"/>
+          <img src="imagehyrox/IMG_0145.webp" alt="Charles Machado coaching" loading="lazy" onerror="this.parentElement.style.background='#e8e2d8'"/>
         </div>
         <div class="story-content">
           <span class="section-tag reveal">La transition</span>
@@ -289,32 +414,61 @@
   </section>
 
 
-  <!-- GALERIE PHOTOS -->
-  <section class="about-gallery-section">
+  <!-- GALERIE PHOTOS — BENTO GRID -->
+  <section class="bento-gallery-section">
     <div class="section-inner">
       <div class="section-header reveal">
         <span class="section-tag">Galerie</span>
         <h2 class="section-title">L'athlète<br/><em>en images</em></h2>
+        <p class="section-desc">Des moments de compétition, d'entraînement et de dépassement de soi.</p>
       </div>
-      <div class="about-gallery-grid reveal">
-        <div class="about-gallery-item">
-          <img src="imagehyrox/IMG_0144.JPG" alt="Charles Machado en compétition" loading="lazy" onerror="this.style.display='none'"/>
+
+      <div class="bento-grid">
+
+        <!-- Colonne 1 — portrait tall (span 2 lignes) -->
+        <div class="bento-cell bento-cell--tall reveal">
+          <img src="imagehyrox/IMG_1165.webp" alt="Charles Machado — HYROX sandbag" loading="lazy" style="object-position: center 30%;"/>
+          <div class="bento-overlay">
+            <div class="bento-label">
+              <span class="bento-label-tag">HYROX</span>
+              <span class="bento-label-text">Sandbag carry</span>
+            </div>
+          </div>
         </div>
-        <div class="about-gallery-item">
-          <img src="imagehyrox/IMG_0140.JPG" alt="Charles Machado" loading="lazy" onerror="this.style.display='none'"/>
+
+        <!-- Colonne 2, ligne 1 — portrait carré -->
+        <div class="bento-cell reveal" style="--delay:0.08s">
+          <img src="imagehyrox/IMG_0140.webp" alt="Charles Machado — athlétisme" loading="lazy" style="object-position: center top;"/>
+          <div class="bento-overlay">
+            <div class="bento-label">
+              <span class="bento-label-tag">Athlétisme</span>
+              <span class="bento-label-text">Sur la piste</span>
+            </div>
+          </div>
         </div>
-        <div class="about-gallery-item">
-          <img src="imagehyrox/IMG_0142.JPG" alt="Charles Machado entraînement" loading="lazy" onerror="this.style.display='none'"/>
+
+        <!-- Colonne 3, ligne 1 — portrait carré -->
+        <div class="bento-cell reveal" style="--delay:0.13s">
+          <img src="imagehyrox/hyrox.webp" alt="Charles Machado — sled push" loading="lazy" style="object-position: center 20%;"/>
+          <div class="bento-overlay">
+            <div class="bento-label">
+              <span class="bento-label-tag">HYROX</span>
+              <span class="bento-label-text">Sled push</span>
+            </div>
+          </div>
         </div>
-        <div class="about-gallery-item">
-          <img src="imagehyrox/IMG_0145.JPG" alt="Charles Machado performance" loading="lazy" onerror="this.style.display='none'"/>
+
+        <!-- Colonne 2–3, ligne 2 — paysage large -->
+        <div class="bento-cell bento-cell--wide reveal" style="--delay:0.2s">
+          <img src="imagehyrox/IMG_0142.webp" alt="Charles Machado — starting blocks" loading="lazy" style="object-position: center 45%;"/>
+          <div class="bento-overlay">
+            <div class="bento-label">
+              <span class="bento-label-tag">Championnats</span>
+              <span class="bento-label-text">Au départ des blocks</span>
+            </div>
+          </div>
         </div>
-        <div class="about-gallery-item">
-          <img src="imagehyrox/IMG_1169.jpeg" alt="Charles Machado athlétisme" loading="lazy" onerror="this.style.display='none'"/>
-        </div>
-        <div class="about-gallery-item">
-          <img src="imagehyrox/68129efce28afbc301658fcef04aaa54.jpg" alt="Charles Machado" loading="lazy" onerror="this.style.display='none'"/>
-        </div>
+
       </div>
     </div>
   </section>
@@ -322,7 +476,7 @@
   <!-- CTA FINAL (fond sombre) -->
   <section class="about-cta-section">
     <div class="section-inner">
-      <span class="section-tag reveal" style="justify-content:center;display:flex">Prêt à transformer votre corps ?</span>
+      <span class="section-tag reveal" style="display:inline-flex;margin:0 auto">Prêt à transformer votre corps ?</span>
       <h2 class="section-title inv reveal" style="text-align:center">Commençons<br/><em>votre odyssée</em></h2>
       <p class="section-desc inv reveal" style="--delay:0.1s">
         Réservez un appel Teams gratuit avec Charles. Ensemble, nous définirons vos objectifs et bâtirons la stratégie qui vous mènera à votre meilleur physique.
@@ -342,13 +496,21 @@
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-statue-bg">
-      <img src="imagehyrox/d7976a2268e4c8c1a2db21651fcb3b32.jpg" alt="" onerror="this.style.display='none'"/>
+      <img src="imagehyrox/blue2.webp" alt="" loading="lazy" onerror="this.style.display='none'"/>
       <div class="footer-overlay"></div>
     </div>
     <div class="footer-inner">
       <div class="footer-brand">
         <a href="index.html" class="nav-logo">C<span class="logo-dot">·</span>M</a>
         <p>Coach Sportif · Préparation physique<br/>& performance athlétique</p>
+        <div class="footer-social" aria-label="Réseaux sociaux">
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="social-glass" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" width="22" height="22"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer" class="social-glass" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" fill="none" width="22" height="22"><path d="M14 3v11.2a3.3 3.3 0 11-2.4-3.18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 3c.4 2.4 2 4.2 4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
       </div>
       <div class="footer-col">
         <h5>Navigation</h5>
@@ -365,7 +527,6 @@
     </div>
     <div class="footer-bottom">
       <p>© 2024 Charles Machado Da Silva · Tous droits réservés</p>
-      <span class="footer-ornament">——— ✦ ———</span>
     </div>
   </footer>
 
@@ -439,6 +600,57 @@
       requestAnimationFrame(draw);
     }
     draw();
+  })();
+
+  /* ── Parallax souris sur le hero photo ── */
+  (function initHeroParallax() {
+    var frame  = document.getElementById('ah2PhotoFrame');
+    var photo  = document.getElementById('ah2Photo');
+    var hero   = document.querySelector('.ah2-hero');
+    if (!frame || !hero || window.matchMedia('(pointer:coarse)').matches) return;
+
+    var tx = 0, ty = 0, cx = 0, cy = 0;
+
+    hero.addEventListener('mousemove', function(e) {
+      var r  = hero.getBoundingClientRect();
+      tx = ((e.clientX - r.left) / r.width  - 0.5) * 60;
+      ty = ((e.clientY - r.top)  / r.height - 0.5) * 44;
+    });
+    hero.addEventListener('mouseleave', function() { tx = 0; ty = 0; });
+
+    (function animate() {
+      cx += (tx - cx) * 0.055;
+      cy += (ty - cy) * 0.055;
+      frame.style.transform = 'perspective(900px) rotateY(' + (cx * 0.55) + 'deg) rotateX(' + (-cy * 0.4) + 'deg) translateX(' + (cx * 1.2) + 'px) translateY(' + (cy * 0.9) + 'px)';
+      if (photo) photo.style.transform = 'scale(1.06) translate(' + (cx * -0.9) + 'px, ' + (cy * -0.65) + 'px)';
+      requestAnimationFrame(animate);
+    })();
+  })();
+
+  /* ── Stagger reveal hero elements ── */
+  (function staggerHero() {
+    var items = document.querySelectorAll('.ah2-left > *');
+    items.forEach(function(el, i) {
+      el.style.animationDelay = (0.1 + i * 0.12) + 's';
+    });
+  })();
+
+  /* ── Tilt 3D sur les stat widgets ── */
+  (function tiltWidgets() {
+    if (window.matchMedia('(pointer:coarse)').matches) return;
+    document.querySelectorAll('.ah2-stat-widget').forEach(function(card) {
+      card.addEventListener('mousemove', function(e) {
+        var r  = card.getBoundingClientRect();
+        var dx = (e.clientX - r.left - r.width  / 2) / (r.width  / 2);
+        var dy = (e.clientY - r.top  - r.height / 2) / (r.height / 2);
+        card.style.transform = 'perspective(600px) rotateY(' + (dx * 8) + 'deg) rotateX(' + (-dy * 6) + 'deg) translateZ(8px) scale(1.04)';
+      });
+      card.addEventListener('mouseleave', function() {
+        card.style.transition = 'transform 0.55s cubic-bezier(0.34,1.56,0.64,1)';
+        card.style.transform  = '';
+        setTimeout(function() { card.style.transition = ''; }, 560);
+      });
+    });
   })();
   </script>
 </body>
